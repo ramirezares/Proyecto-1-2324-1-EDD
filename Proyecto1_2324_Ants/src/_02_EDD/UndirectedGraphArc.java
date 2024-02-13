@@ -8,6 +8,6 @@ package _02_EDD;
  *
  * @author AresR
  */
-public class UndirectedGraphEdge {
+public class UndirectedGraphArc {
     
 }
