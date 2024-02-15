@@ -8,14 +8,15 @@ package _02_EDD;
  *
  * @author AresR
  */
-public interface IUndirectedGraph {
-    // String Name="";
-    // int numVertices
-    // LinkedSimpleList arc Lista de adyacencia
+public interface IUndirectedGraphArc {
     
-    public void VertexAdj(); //Constructor
+    public void Arc(int destination);
     
-    //Otros metodos 
+    public void Arc(int destino,double peso);
     
+    public int GetDestination();
     
+    public boolean IsEquals(UndirectedGraphArc A); 
+    
+    //Revisar otros posibles metodos
 }
