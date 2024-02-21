@@ -7,15 +7,11 @@ package _02_EDD;
 /**
  * Esta interfaz define la estructura para la clase LinkedSimpleList
  * @author AresR
- * @version 13/02/2024
- * @param <A>
+ * @version 15/02/2024 (V2)
+ * @param <A> Representa el tipo de dato que guardara el nodo, declarado general
+ * Se usa "<>" para declararlo generico.
  */
 public interface ILinkedList<A> {
-    
-    /**
-     * Metodo a desarrollar para instanciar la clase LinkedSimpleList.
-     */
-    public void LinkedSimpleList();
     
     /**
      * Metodo a desarrollar para verificar si una instancia de la clase LinkedSimpleList
@@ -69,6 +65,58 @@ public interface ILinkedList<A> {
      * dentro de una instancia de la clase LinkedSimpleList.
      */
     public void destroyer();
+    
+    /**
+     * Metodo a desarrollar para obtener el nodo que se encuentra en un indice especifico
+     * @param n Representa el numero del indice de la lista que se desea obtener
+     * @return Retorna el nodo que se encuentra en la posicion indicada, si esta posicion
+     * existe dentro de la lista, es decir, si la posicion indicada pertenece al conjunto 
+     * de numeros que se encuentran entre 0 y el tamaño de la lista. De lo contrario, si 
+     * la lista esta vacia o si el indice indicado no se encuentra en la lista, retorna null
+     */
+    public SimpleNode GetValInIndex(int n);
+    
+    /**
+     * Metodo a desarrollar para obtener el nodo que se encuentra en la cabeza de una
+     * instancia de la clase LinkedSimpleList.
+     * @return Retorna el nodo correspondiente al puntero pFirst
+     */
+    public SimpleNode GetpFirst();
+    
+    /**
+     * Metodo a desarrollar para obtener el nodo que se encuentra en la cola de una
+     * instancia de la clase LinkedSimpleList.
+     * @return Retorna el nodo correspondiente al puntero pLast
+     */
+    public SimpleNode GetpLast();
+    
+    /**
+     * Metodo a desarrollar para obtener el tamaño de una instancia de la clase 
+     * LinkedSimpleList.
+     * @return Retorna el entero que corresponde al atributo Size
+     */
+    public int GetSize();
+    
+    /**
+     * Metodo a desarrollar para modificar el atributo pFirst de una instancia 
+     * de la clase LinkedSimpleList. 
+     * @param nFirst Representa el nuevo nodo que almacenará a pFirst
+     */
+    public void SetpFirst(SimpleNode nFirst);
+    
+    /**
+     * Metodo a desarrollar para modificar el atributo pLast de una instancia 
+     * de la clase LinkedSimpleList. 
+     * @param sLast Representa el nuevo nodo que almacenará a pLast
+     */
+    public void SetpLast(SimpleNode sLast);
+    
+    /**
+     * Metodo a desarrollar para modificar el atributo Size de una instancia 
+     * de la clase LinkedSimpleList.
+     * @param nSize Representa el nuevo valor que almacenará Size.
+     */
+    public void SetSize(int nSize);
     
     //Verificar otros posibles metodos
 }

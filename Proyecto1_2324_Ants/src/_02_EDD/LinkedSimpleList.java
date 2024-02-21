@@ -5,9 +5,13 @@
 package _02_EDD;
 
 /**
- * 
+ * Clase LinkedSimpleList
+ * Esta clase define el objeto lista y su comportamiento, con sus atributos pFirst,
+ * pLast y size. Siendo pFirst y pLast de la clase SimpleNode.
  * @author AresR
- * @param <A> 
+ * @version 17/02/2024
+ * @param <A> Representa el tipo de dato que guardara el nodo, declarado general.
+ * Se usa "<>" para declararlo generico.
  */
 public class LinkedSimpleList<A> implements ILinkedList<A> {
     
@@ -19,8 +23,7 @@ public class LinkedSimpleList<A> implements ILinkedList<A> {
      * Instancia la clase LinkedSimpleList definiendo los atributos pFirst y pLast
      * como null y size como 0. Crea la lista vacia.
      */
-    @Override
-    public void LinkedSimpleList() {
+    public LinkedSimpleList() {
         this.pFirst=this.pLast=null;
         size=0;
     }
@@ -52,8 +55,7 @@ public class LinkedSimpleList<A> implements ILinkedList<A> {
      */
     @Override
     public void insertHead(A Data) {
-        SimpleNode NNode = new SimpleNode();
-        NNode.SetData(Data);
+        SimpleNode NNode = new SimpleNode(Data);
         if(this.size<2){
             if(this.pFirst==null){
                 this.pFirst=this.pLast=NNode;
@@ -77,7 +79,7 @@ public class LinkedSimpleList<A> implements ILinkedList<A> {
      */
     @Override
     public void insertLast(A Data) {
-        SimpleNode NNode = new SimpleNode();
+        SimpleNode NNode = new SimpleNode(Data);
         NNode.SetData(Data);
         if (size<2){
             if (this.pFirst==null){
@@ -168,5 +170,100 @@ public class LinkedSimpleList<A> implements ILinkedList<A> {
         }
         System.out.println("Lista vaciada.");
     }
+
+    /**
+     * Busca y devuelve el nodo que se encuentra en un indice indicado.
+     * @param n Representa el numero del indice de la lista que se desea obtener
+     * @return  Retorna el nodo que se encuentra en la posicion indicada, si esta posicion
+     * existe dentro de la lista, es decir, si la posicion indicada pertenece al conjunto 
+     * de numeros que se encuentran entre 0 y el tamaño de la lista. De lo contrario, si 
+     * la lista esta vacia o si el indice indicado no se encuentra en la lista, retorna null
+     */
+    @Override
+    public SimpleNode GetValInIndex(int n) {
+        SimpleNode matched;
+        if (this.size>0){
+            if(n<=this.size){
+                int aux=0;
+                for (SimpleNode pNode=this.pFirst;pNode!=null;pNode=pNode.GetNxt()){
+                    if (aux==n){
+                        matched=pNode;
+                        return matched;
+                    }
+                }
+                    
+            }else{
+            System.out.println("Indice invalido. No esta en la lista");
+            return null;
+            }            
+        }
+        else{
+            System.out.println("La lista no tiene elementos");
+            return null;
+        }
+        return null;
+    }
+
+    /**
+     * Obtiene el nodo guardado en el atributo pFirst de una instancia de la
+     * clase LinkedSimpleList.
+     * @return Retorna el nodo guardado en el atributo pFirst
+     */
+    @Override
+    public SimpleNode GetpFirst(){
+        return this.pFirst;
+    }
+
+    /**
+     * Obtiene el nodo guardado en el atributo pLast de una instancia de la
+     * clase LinkedSimpleList.
+     * @return Retorna el nodo guardado en el atributo pLast
+     */
+    @Override
+    public SimpleNode GetpLast(){
+        return this.pLast;
+    }
+
+    /**
+     * Obtiene el valor guardado en el atributo Size de una instancia de la
+     * clase LinkedSimpleList.
+     * @return Retorna el entero guardado en el atributo Size que representa el 
+     * largo de la lista
+     */
+    @Override
+    public int GetSize() {
+        return this.size;
+    }
+
+    /**
+     * Modifica el atributo pFirst de una instancia de la clase LinkedSimpleList,
+     * remplazandolo por un nuevo nodo.
+     * @param nFirst
+     */
+    @Override
+    public void SetpFirst(SimpleNode nFirst) {
+        this.pFirst = nFirst;
+    }
+
+    /**
+     * Modifica el atributo pLast de una instancia de la clase LinkedSimpleList,
+     * remplazandolo por un nuevo nodo.
+     * @param nLast
+     */
+    @Override
+    public void SetpLast(SimpleNode nLast) {
+        this.pLast = nLast;
+    }
+
+    /**
+     * Modifica el atributo size de una instancia de la clase LinkedSimpleList,
+     * remplazandolo por el nuevo valor que tendra size.
+     * @param nSize
+     */
+    @Override
+    public void SetSize(int nSize) {
+        this.size = nSize;
+    }
+    
     
 }

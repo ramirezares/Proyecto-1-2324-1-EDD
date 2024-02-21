@@ -5,20 +5,30 @@
 package _02_EDD;
 
 /**
- *
+ * Esta interfaz define la estructura para la clase Vertice
  * @author AresR
+ * @version 17/02/2024
  */
+
 public interface IVertex {
-    
-    public void Vertex(String name);
-    
-    public String GetVertexName();//return name
     
     public boolean IsEquals(Vertex n);
     
-    public void SetVertNumber(int n); //Establece el numero de vertices
+    public String ConvertToStringForTXT(); 
     
-    public String ConvertToStringForPrint(); //Caracteristicas del vertice
+    public boolean IsArcInGraph(UndirectedGraphArc Arc);
+    
+    public boolean AddArc(UndirectedGraphArc Arc);
+    
+    public boolean DelArc(UndirectedGraphArc Arc);
+    
+    public int GetNumVertex();
+    
+    public void SetNumVertex(int numVertex);
+   
+    public LinkedSimpleList GetListAdy();
+    
+    public void SetListAdy(LinkedSimpleList listAdy);
     
     //Revisar otros posibles metodos
 }

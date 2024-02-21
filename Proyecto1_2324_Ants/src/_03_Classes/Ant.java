@@ -10,4 +10,8 @@ package _03_Classes;
  */
 public class Ant {
     
+    // vertex vertice actual
+    // linkedlist vertices visitados
+    // double distancia recorrida
+    
 }

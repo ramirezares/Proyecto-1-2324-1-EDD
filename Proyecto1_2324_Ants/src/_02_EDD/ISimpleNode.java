@@ -7,25 +7,11 @@ package _02_EDD;
 /**
  * Esta interfaz define la estructura para la clase SimpleNode
  * @author AresR
- * @version 13/02/2024
- * @param <A> Representa el tipo de dato que guardara el nodo.
+ * @version 17/02/2024 (v2)
+ * @param <A> Representa el tipo de dato que guardara el nodo, declarado general
+ * Se usa "<>" para declararlo generico.
  */
 public interface ISimpleNode<A> {
-    
-    /**
-     * Metodo a desarrollar para instanciar la clase SimpleNode otorgando un 
-     * valor al atributo Data. Nxt se define como null. 
-     * @param Data Representa el valor que guardara el nodo.
-     */
-    public void SimpleNode(A Data);
-    
-    /**
-     * Metodo a desarrollar para instanciar la clase SimpleNode otorgando un 
-     * valor a los atributos Data y Nxt
-     * @param Data Representa el valor que guardara el nodo.
-     * @param Nxt representa el puntero que guarda/apunta el siguiente nodo
-     */
-    public void SimpleNode(A Data,SimpleNode Nxt);
     
     /**
      * Metodo a desarrollar para acceder al valor del atributo Data de una 

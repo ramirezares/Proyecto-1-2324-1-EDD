@@ -8,7 +8,7 @@ package _02_EDD;
  * Clase SimpleNode
  * Esta clase define el objeto nodo y su comportamiento, con sus atributos Data y Nxt
  * @author AresR
- * @version 13/02/2024
+ * @version 17/02/2024 (v2)
  * @param <A> Representa el tipo de dato que guardara el nodo. 
  * Se usa "<>" para declararlo generico.
  */
@@ -17,13 +17,18 @@ public class SimpleNode<A> implements ISimpleNode<A> {
     private A Data;
     private SimpleNode Nxt;
     
+    
+    public SimpleNode(){
+        this.Data=null;
+        this.Nxt=null;
+    }
+    
     /**
      * Instancia la clase SimpleNode otorgando un valor al atributo Data,
      * Nxt se define como null. 
      * @param Data Representa el tipo de dato que guardara el nodo.
      */
-    @Override
-    public void SimpleNode(A Data){
+    public SimpleNode(A Data){
         this.Data=Data;
         this.Nxt=null;
     }
@@ -33,8 +38,7 @@ public class SimpleNode<A> implements ISimpleNode<A> {
      * @param Data Representa el tipo de dato que guardara el nodo.
      * @param Nxt representa el puntero que guarda/apunta el siguiente nodo
      */
-    @Override
-    public void SimpleNode(A Data,SimpleNode Nxt){
+    public SimpleNode(A Data,SimpleNode Nxt){
         this.Data=Data;
         this.Nxt=Nxt;
     }

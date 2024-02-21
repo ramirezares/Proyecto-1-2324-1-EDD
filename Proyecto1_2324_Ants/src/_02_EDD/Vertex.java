@@ -8,42 +8,101 @@ package _02_EDD;
  *
  * @author AresR
  */
-public class Vertex implements IVertex {
+public class Vertex implements IVertex{
     
-    String name;
-    int numVertex;
-    LinkedSimpleList listAdy;
+    private int numVertex;
+    private LinkedSimpleList<UndirectedGraphArc> listAdy;
 
     /**
      *
-     * @param name
+     * @param n
      */
-    @Override
-    public void Vertex(String name) {
-        this.name=name;
-        this.numVertex=-1;
-        this.listAdy= new LinkedSimpleList();
-        
-    }
-
-    @Override
-    public String GetVertexName() {
-        return this.name;
-    }
-
-    @Override
-    public boolean IsEquals(Vertex n) {
-        return java.util.Objects.equals(this.name, n.name);
-    }
-
-    @Override
-    public void SetVertNumber(int n) {
+    public Vertex(int n) {
         this.numVertex=n;
-    }
-
-    @Override
-    public String ConvertToStringForPrint() {
-        return "Nombre:"+this.name+" num. "+this.numVertex;
+        this.listAdy= new LinkedSimpleList<>();
     }
     
+    //@Override
+    public boolean IsEquals(Vertex vertex) {
+        boolean val=false;
+        if(this.numVertex==vertex.numVertex){
+            val=true;   
+        }
+        return val;
+    }
+    
+    //@Override
+    public String ConvertToStringForTXT(){
+        return Integer.toString(this.numVertex) ;
+    }
+    
+    //@Override
+    public boolean IsArcInGraph(UndirectedGraphArc Arc) {
+        boolean val=false;
+        for(SimpleNode pNode=this.listAdy.GetpFirst();
+            pNode!=null;
+            pNode=pNode.GetNxt()){
+            
+            UndirectedGraphArc ArcInNode = (UndirectedGraphArc) pNode.GetData();
+            if(ArcInNode.IsEquals(Arc)){
+                val=true;
+                }
+            
+        }
+        return val;
+    }
+
+    //@Override
+    public boolean AddArc(UndirectedGraphArc Arc) {
+        boolean val=false;
+        if (!this.IsArcInGraph(Arc)){
+            SimpleNode NNode=new SimpleNode();
+            NNode.SetData(Arc);
+            this.listAdy.GetpLast().SetNxt(NNode);
+            this.listAdy.SetpLast(NNode);
+            int NSize=this.listAdy.GetSize();
+            NSize++;
+            this.listAdy.SetSize(NSize);
+            val=true;
+        }
+        return val;
+    }
+
+    //@Override
+    public boolean DelArc(UndirectedGraphArc Arc) {
+        boolean val=false;
+        if (this.IsArcInGraph(Arc)){
+            for(SimpleNode pNode=this.listAdy.GetpFirst(),pPrev=null;
+                pNode!=null;
+                pPrev=pNode,pNode=pNode.GetNxt())
+                {
+                if(pNode.GetData().equals(Arc)){
+                    pPrev.SetNxt(pNode.GetNxt());
+                    val=true;
+                    break;
+                    }
+                }
+        }
+        return val;
+    }
+
+    //@Override
+    public int GetNumVertex() {
+        return numVertex;
+    }
+
+    //@Override
+    public void SetNumVertex(int numVertex) {
+        this.numVertex = numVertex;
+    }
+
+    //@Override
+    public LinkedSimpleList GetListAdy() {
+        return listAdy;
+    }
+
+    //@Override
+    public void SetListAdy(LinkedSimpleList listAdy) {
+        this.listAdy = listAdy;
+    }
 }

@@ -9,5 +9,8 @@ package _04_Functions;
  * @author AresR
  */
 public class Function01Simulation {
+    // inicializar hormigas dado un numero recibe int devuelve una lista simple
+    
+    // dado un grafo inicializar las feromonas 
     
 }

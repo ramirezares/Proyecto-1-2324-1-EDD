@@ -8,6 +8,6 @@ package _04_Functions;
  *
  * @author AresR
  */
-public class Function03Load {
+public class Function03ViewWithGraphStream {    //Libreria
     
 }

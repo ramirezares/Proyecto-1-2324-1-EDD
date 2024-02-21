@@ -5,18 +5,29 @@
 package _02_EDD;
 
 /**
- *
+ * Esta interfaz define la estructura para la clase UndirectedGraphArc
  * @author AresR
+ * @version 17/02/2024
  */
 public interface IUndirectedGraphArc {
     
-    public void Arc(int destination);
+    public boolean IsEquals(UndirectedGraphArc Arc);
     
-    public void Arc(int destino,double peso);
+    public int GetOrigin();
+    
+    public void SetOrigin(int origin);
     
     public int GetDestination();
     
-    public boolean IsEquals(UndirectedGraphArc A); 
+    public void SetDestination(int destination);
+    
+    public double GetWeight();
+    
+    public void SetWeight(double weight);
+    
+    public double getPheromones();
+    
+    public void setPheromones(double pheromones);
     
     //Revisar otros posibles metodos
 }
