@@ -4,6 +4,13 @@
  */
 package _06_Interfaces;
 
+import _02_EDD.SimpleNode;
+import _02_EDD.UndirectedGraph;
+import _02_EDD.UndirectedGraphArc;
+import _02_EDD.Vertex;
+import _04_Functions.Function04AddCity;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author blanf
@@ -15,7 +22,9 @@ public class AddCity extends javax.swing.JFrame {
      */
     public AddCity() {
         initComponents();
-        this.setLocationRelativeTo(null);        
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -27,62 +36,219 @@ public class AddCity extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        titleAddCity = new javax.swing.JLabel();
+        back = new javax.swing.JButton();
+        titleIdentifierOfCity = new javax.swing.JLabel();
+        buttonAddCity = new javax.swing.JButton();
+        titleAddRoad = new javax.swing.JLabel();
+        titleOrigin = new javax.swing.JLabel();
+        origins = new javax.swing.JComboBox<>();
+        titleDestination = new javax.swing.JLabel();
+        destinations = new javax.swing.JComboBox<>();
+        titleWeight = new javax.swing.JLabel();
+        textFieldWeight = new javax.swing.JTextField();
+        identierOfCity = new javax.swing.JComboBox<>();
+        buttonAddArc = new javax.swing.JButton();
+        bnRefreshCitiesLists = new javax.swing.JButton();
+        Cities = new javax.swing.JTextField();
+        titleWeight1 = new javax.swing.JLabel();
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Agregar ciudad");
+        titleAddCity.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        titleAddCity.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleAddCity.setText("Agregar ciudades");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("Guardar");
-
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton2.setText("Volver");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        back.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        back.setText("Volver");
+        back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                backActionPerformed(evt);
             }
         });
+
+        titleIdentifierOfCity.setText("Identificador (numero de la ciudad):");
+
+        buttonAddCity.setText("Agregar ciudad");
+        buttonAddCity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAddCityActionPerformed(evt);
+            }
+        });
+
+        titleAddRoad.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        titleAddRoad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleAddRoad.setText("Agregar camino");
+
+        titleOrigin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleOrigin.setText("Ciudad origen:");
+
+        titleDestination.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleDestination.setText("Ciudad destino:");
+
+        titleWeight.setText("Distancia:");
+
+        textFieldWeight.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        textFieldWeight.setText("1");
+
+        identierOfCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
+
+        buttonAddArc.setText("Agregar camino");
+        buttonAddArc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAddArcActionPerformed(evt);
+            }
+        });
+
+        bnRefreshCitiesLists.setText("Actualizar ");
+        bnRefreshCitiesLists.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnRefreshCitiesListsActionPerformed(evt);
+            }
+        });
+
+        titleWeight1.setText("Ciudades:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(125, 125, 125)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(132, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(back)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bnRefreshCitiesLists))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(titleOrigin, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(origins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(titleDestination, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(destinations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)
+                                .addComponent(titleWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(titleAddRoad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(titleAddCity, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(titleIdentifierOfCity, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(identierOfCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buttonAddCity)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                                .addComponent(titleWeight1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(textFieldWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(buttonAddArc)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(Cities))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 225, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
+                .addComponent(titleAddCity)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(titleIdentifierOfCity)
+                    .addComponent(buttonAddCity)
+                    .addComponent(identierOfCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Cities, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(titleWeight1))
+                .addGap(33, 33, 33)
+                .addComponent(titleAddRoad)
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(titleOrigin)
+                    .addComponent(origins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(titleDestination)
+                    .addComponent(destinations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(titleWeight)
+                    .addComponent(textFieldWeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonAddArc))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(back)
+                    .addComponent(bnRefreshCitiesLists))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    Modify a = new Modify();
-    a.setVisible(true);
-    this.setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        Modify ModifyWindow = new Modify();
+        ModifyWindow.setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_backActionPerformed
+
+    private void buttonAddCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddCityActionPerformed
+        
+        UndirectedGraph temporalGraph;
+        
+        Function04AddCity temporalFunction = new Function04AddCity();
+        
+        temporalGraph = temporalFunction.AddCityToVertex(Menu.GraphOfProgram, identierOfCity.getSelectedItem().toString());
+        
+        if (temporalGraph != null) {
+            JOptionPane.showMessageDialog(null, "Agregado.");
+            Menu.GraphOfProgram = temporalGraph;
+        } else {
+            JOptionPane.showMessageDialog(null, "Ya se encuentra en el grafo.");
+        }
+
+    }//GEN-LAST:event_buttonAddCityActionPerformed
+
+    private void buttonAddArcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddArcActionPerformed
+        int origin, destination;
+        double weight;
+        UndirectedGraph temporalGraph;
+        Function04AddCity temporalFunction = new Function04AddCity();
+        
+        origin = Integer.parseInt(this.origins.getSelectedItem().toString());
+        destination = Integer.parseInt(this.destinations.getSelectedItem().toString());
+        weight = Double.parseDouble(this.textFieldWeight.getText());
+        UndirectedGraphArc Arc = new UndirectedGraphArc(origin,destination,weight);
+        temporalGraph = temporalFunction.AddArcToVertexWithAtributes(Menu.GraphOfProgram, Arc);
+        
+        if (temporalGraph != null) {
+            Menu.GraphOfProgram = temporalGraph;
+        } else {
+            JOptionPane.showMessageDialog(null, "Ya se encuentra en el grafo.");
+        }
+    }//GEN-LAST:event_buttonAddArcActionPerformed
+
+    private void bnRefreshCitiesListsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnRefreshCitiesListsActionPerformed
+        StringBuilder txt = new StringBuilder();
+        String item;
+        
+        this.origins.removeAll();
+        this.origins.removeAll();
+        
+        for (SimpleNode pNode = Menu.GraphOfProgram.getListofVertex().GetpFirst(); pNode != null; pNode = pNode.GetNxt()) {
+            Vertex v = (Vertex) pNode.GetData();
+            item = String.valueOf(v.GetNumVertex());
+            txt.append(item).append(",");
+            this.origins.addItem(item);
+            this.destinations.addItem(item);
+            Cities.setText(txt.toString());
+        }
+    }//GEN-LAST:event_bnRefreshCitiesListsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,8 +289,22 @@ public class AddCity extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField Cities;
+    private javax.swing.JButton back;
+    private javax.swing.JButton bnRefreshCitiesLists;
+    private javax.swing.JButton buttonAddArc;
+    private javax.swing.JButton buttonAddCity;
+    private javax.swing.JComboBox<String> destinations;
+    private javax.swing.JComboBox<String> identierOfCity;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> origins;
+    private javax.swing.JTextField textFieldWeight;
+    private javax.swing.JLabel titleAddCity;
+    private javax.swing.JLabel titleAddRoad;
+    private javax.swing.JLabel titleDestination;
+    private javax.swing.JLabel titleIdentifierOfCity;
+    private javax.swing.JLabel titleOrigin;
+    private javax.swing.JLabel titleWeight;
+    private javax.swing.JLabel titleWeight1;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,7 +15,7 @@ public class Modify extends javax.swing.JFrame {
      */
     public Modify() {
         initComponents();
-        this.setLocationRelativeTo(null);        
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -97,21 +97,21 @@ public class Modify extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-    Menu menuWindow = new Menu();
-    menuWindow.setVisible(true);
-    this.setVisible(false);
+        Menu menuWindow = new Menu();
+        menuWindow.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_backActionPerformed
 
     private void AddCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCityActionPerformed
-    AddCity addCityWindow = new AddCity();
-    addCityWindow.setVisible(true);
-    this.setVisible(false);
+        AddCity addCityWindow = new AddCity();
+        addCityWindow.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_AddCityActionPerformed
 
     private void DeleteCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteCityActionPerformed
-    DeleteCity deleteCityWindow = new DeleteCity();
-    deleteCityWindow.setVisible(true);
-    this.setVisible(false);
+        DeleteCity deleteCityWindow = new DeleteCity();
+        deleteCityWindow.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_DeleteCityActionPerformed
 
     /**

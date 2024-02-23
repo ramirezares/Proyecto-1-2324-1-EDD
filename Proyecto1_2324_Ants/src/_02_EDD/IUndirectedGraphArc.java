@@ -5,7 +5,7 @@
 package _02_EDD;
 
 /**
- * Esta interfaz define la estructura para la clase UndirectedGraphArc
+ * Esta interfaz define la estructura basica para la clase UndirectedGraphArc
  * @author AresR
  * @version 17/02/2024
  */

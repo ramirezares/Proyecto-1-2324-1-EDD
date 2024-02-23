@@ -5,7 +5,7 @@
 package _02_EDD;
 
 /**
- * Esta interfaz define la estructura para la clase Vertice
+ * Esta interfaz define la estructura basica para la clase Vertice
  * @author AresR
  * @version 17/02/2024
  */
@@ -16,7 +16,7 @@ public interface IVertex {
     
     public String ConvertToStringForTXT(); 
     
-    public boolean IsArcInGraph(UndirectedGraphArc Arc);
+    public boolean IsArcInVertex(UndirectedGraphArc Arc);
     
     public boolean AddArc(UndirectedGraphArc Arc);
     

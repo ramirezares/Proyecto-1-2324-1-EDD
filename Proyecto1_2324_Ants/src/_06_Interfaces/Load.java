@@ -14,22 +14,18 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-
 /**
  *
  * @author blanf && AresR
  */
 public class Load extends javax.swing.JFrame {
 
-    UndirectedGraph temporalGraphForLoad;
-    
     /**
      * Creates new form Ventana4
      */
     public Load() {
-        UndirectedGraph temporalGraphForLoad = new UndirectedGraph();
         initComponents();
-        this.setLocationRelativeTo(null);        
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -44,11 +40,12 @@ public class Load extends javax.swing.JFrame {
         back = new javax.swing.JButton();
         Title = new javax.swing.JLabel();
         read = new javax.swing.JButton();
-        Use = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
+        save = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         back.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         back.setText("Volver");
@@ -57,10 +54,12 @@ public class Load extends javax.swing.JFrame {
                 backActionPerformed(evt);
             }
         });
+        getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 299, 83, -1));
 
         Title.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Title.setText("Cargar");
+        getContentPane().add(Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 14, 92, -1));
 
         read.setText("Buscar txt");
         read.addActionListener(new java.awt.event.ActionListener() {
@@ -68,103 +67,73 @@ public class Load extends javax.swing.JFrame {
                 readActionPerformed(evt);
             }
         });
-
-        Use.setText("Usar txt");
-        Use.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UseActionPerformed(evt);
-            }
-        });
+        getContentPane().add(read, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 123, 89, -1));
 
         textArea.setColumns(20);
         textArea.setRows(5);
         jScrollPane1.setViewportView(textArea);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(read, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-                            .addComponent(Use, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(81, 81, 81)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(208, 208, 208)
-                .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(Title)
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(read)
-                        .addGap(53, 53, 53)
-                        .addComponent(Use)
-                        .addGap(93, 93, 93)
-                        .addComponent(back))
-                    .addComponent(jScrollPane1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(251, 72, 284, 258));
+
+        save.setText("Guardar");
+        save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveActionPerformed(evt);
+            }
+        });
+        getContentPane().add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 89, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-    Menu menuWindows = new Menu(temporalGraphForLoad);
-    menuWindows.setVisible(true);
-    this.setVisible(false);
-    //Al darle volver pasar a Menu el grafo temporalGraphForLoad
+        Menu menuWindow = new Menu();
+        menuWindow.setVisible(true);
+        this.setVisible(false);
+        if (Menu.GraphOfProgram.IsGraphEmpty()) {
+            JOptionPane.showMessageDialog(null, "No se ha cargado ningun grafo.");
+        }
+
     }//GEN-LAST:event_backActionPerformed
 
     private void readActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_readActionPerformed
         JFileChooser fc = new JFileChooser();
-        
+
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.TXT", "txt");
-        
+
         fc.setFileFilter(filtro);
-        
+
         int seleccion = fc.showOpenDialog(this);
-        
-        if(seleccion == JFileChooser.APPROVE_OPTION){     
-   
+
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+
             File fichero = fc.getSelectedFile();
-            
-            try(FileReader fr = new FileReader(fichero)){
+
+            try (FileReader fr = new FileReader(fichero)) {
                 String cadena = "";
                 int valor = fr.read();
-                while(valor != -1){
+                while (valor != -1) {
                     cadena = cadena + (char) valor;
                     valor = fr.read();
                 }
                 this.textArea.setText(cadena);
-            }catch (IOException e1){
+            } catch (IOException e1) {
                 e1.printStackTrace();
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún archivo.");
         }
     }//GEN-LAST:event_readActionPerformed
 
-    private void UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UseActionPerformed
-        
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+
         Function02Load temporalForCreateGraph = new Function02Load();
-        temporalForCreateGraph.graphToReturn(textArea.toString());
-        
-    }//GEN-LAST:event_UseActionPerformed
+        try {    
+            Menu.GraphOfProgram = temporalForCreateGraph.graphToReturn(textArea.getText());
+        } catch (NumberFormatException err) {
+            JOptionPane.showMessageDialog(null, "No es posible convertir este archivo. Estructura incorrecta.");
+        }
+    }//GEN-LAST:event_saveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,10 +175,10 @@ public class Load extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Title;
-    private javax.swing.JButton Use;
     private javax.swing.JButton back;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton read;
+    private javax.swing.JButton save;
     private javax.swing.JTextArea textArea;
     // End of variables declaration//GEN-END:variables
 }

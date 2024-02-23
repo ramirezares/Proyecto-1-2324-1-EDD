@@ -5,6 +5,8 @@
 package _06_Interfaces;
 
 import _02_EDD.UndirectedGraph;
+import _04_Functions.Function03SaveInTXT;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,26 +14,17 @@ import _02_EDD.UndirectedGraph;
  */
 public class Menu extends javax.swing.JFrame {
 
-    UndirectedGraph GraphOfProgram;
-    
+    public static UndirectedGraph GraphOfProgram = new UndirectedGraph();
+
     /**
      * Creates new form Ventana2
      */
     public Menu() {
-        this.GraphOfProgram=new UndirectedGraph();
-        initComponents();                       
+        initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
     
-    public Menu(UndirectedGraph GraphToProgram) {
-        this.GraphOfProgram= GraphToProgram;
-        initComponents();                       
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
-    }
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,43 +103,44 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 64, Short.MAX_VALUE)
+                        .addGap(0, 55, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(LoadGraph, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ShowGraph, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(45, 45, 45)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(SaveGraphInTXT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(ModifyGraph, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
-                                .addGap(43, 43, 43))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(CloseProgram, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(14, 14, 14))))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(NewSimulation)
-                .addGap(145, 145, 145))
+                                .addGap(14, 14, 14))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(NewSimulation)
+                                .addGap(147, 147, 147))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(LoadGraph, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(45, 45, 45)
+                                        .addComponent(ShowGraph, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(SaveGraphInTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(ModifyGraph, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(54, 54, 54))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
+                .addGap(36, 36, 36)
                 .addComponent(NewSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LoadGraph, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ShowGraph, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ModifyGraph, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LoadGraph, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SaveGraphInTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ShowGraph, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                    .addComponent(SaveGraphInTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(CloseProgram, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
@@ -155,38 +149,61 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ModifyGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyGraphActionPerformed
-    Modify a = new Modify();
-    a.setVisible(true);
-    this.setVisible(false);
+        if (!GraphOfProgram.IsGraphEmpty()) {
+            
+            Modify modifyWindow = new Modify();
+            modifyWindow.setVisible(true);
+            this.setVisible(false);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Carge un grafo antes por favor.");
+        }
     }//GEN-LAST:event_ModifyGraphActionPerformed
 
     private void LoadGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadGraphActionPerformed
-    Load loadWindow = new Load();
-    loadWindow.setVisible(true);
-    this.setVisible(false);
+        Load loadWindow = new Load();
+        loadWindow.setVisible(true);
     }//GEN-LAST:event_LoadGraphActionPerformed
 
     private void NewSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewSimulationActionPerformed
-    SimulateDates simulateDates = new SimulateDates();
-    simulateDates.setVisible(true);
-    this.setVisible(false);
-    Simulation simulateWindouw = new Simulation();
-    simulateWindouw // Implementar JFrame Simulation
+        if (!GraphOfProgram.IsGraphEmpty()) {
+            
+            SimulateDates simulateDates = new SimulateDates();
+            simulateDates.setVisible(true);
+            this.setVisible(false);
+            Simulation simulateWindouw = new Simulation();
+            //simulateWindouw // Implementar JFrame Simulation
+                    
+        } else {
+            JOptionPane.showMessageDialog(null, "Carge un grafo antes por favor.");
+        }
     }//GEN-LAST:event_NewSimulationActionPerformed
 
     private void ShowGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowGraphActionPerformed
-    Show showWindow = new Show();
-    showWindow.setVisible(true);
-    this.setVisible(false);
-    showWindow  //Implementar interfaz
+
+        if (!GraphOfProgram.IsGraphEmpty()) {
+
+            Show showWindow = new Show();
+            showWindow.setVisible(true);
+            this.setVisible(false);
+            //showWindow //Implementar Libreria
+                
+        } else {
+            JOptionPane.showMessageDialog(null, "Carge un grafo antes por favor.");
+        }
     }//GEN-LAST:event_ShowGraphActionPerformed
 
     private void SaveGraphInTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveGraphInTXTActionPerformed
-       
+
+        Function03SaveInTXT txtToSave = new Function03SaveInTXT();
+        txtToSave.txtToSave(GraphOfProgram);
+        
+        
     }//GEN-LAST:event_SaveGraphInTXTActionPerformed
 
     private void CloseProgramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseProgramActionPerformed
-    System.exit(0); 
+        System.out.println(GraphOfProgram.ShowGraphSummary());;                 // Eliminar al final
+        System.exit(0);
     }//GEN-LAST:event_CloseProgramActionPerformed
 
     /**

@@ -5,7 +5,7 @@
 package _02_EDD;
 
 /**
- * Esta interfaz define la estructura para la clase LinkedSimpleList
+ * Esta interfaz define la estructura basica para la clase LinkedSimpleList
  * @author AresR
  * @version 15/02/2024 (V2)
  * @param <A> Representa el tipo de dato que guardara el nodo, declarado general

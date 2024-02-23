@@ -11,8 +11,6 @@ import _02_EDD.UndirectedGraph;
  * @author AresR
  */
 public class Welcome extends javax.swing.JFrame {
-
-    UndirectedGraph GraphtoProgram;
     
     /**
      * Creates new form Welcome
@@ -22,14 +20,6 @@ public class Welcome extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-
-    public Welcome(UndirectedGraph GraphtoProgram) {
-        initComponents();                       
-        this.GraphtoProgram=GraphtoProgram;
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -87,6 +77,7 @@ public class Welcome extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BContinueActionPerformed
+        this.setVisible(false);
         Menu menuWindouw = new Menu();
     }//GEN-LAST:event_BContinueActionPerformed
 

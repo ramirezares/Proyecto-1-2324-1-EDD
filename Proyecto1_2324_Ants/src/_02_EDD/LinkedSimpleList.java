@@ -31,7 +31,7 @@ public class LinkedSimpleList<A> implements ILinkedList<A> {
     /**
      * Verifica si una instancia de la clase LinkedSimpleList se encuentra vacia
      * o no. Verifica si la lista tiene por lo menos un elemento.
-     * @return Retorne True si la lista no tiene elementos. En caso contrario 
+     * @return Retorna True si la lista no tiene elementos. En caso contrario 
      * retorna false.
      */
     @Override
@@ -145,7 +145,7 @@ public class LinkedSimpleList<A> implements ILinkedList<A> {
     public void delNodewithVal(A Data) {
         if (isDataInList(Data)){
             for(SimpleNode pPrev=null,pCurrent=this.pFirst;
-                pCurrent!=null && pPrev!=null ;
+                pCurrent!=null;
                 pPrev=pCurrent,pCurrent=pCurrent.GetNxt()){
                 
                 if (java.util.Objects.equals(pCurrent.GetData(), Data)){
@@ -265,5 +265,5 @@ public class LinkedSimpleList<A> implements ILinkedList<A> {
         this.size = nSize;
     }
     
-    
+    // Crear metodo para obtener los contenidos de una lista segun el indice. Recorrer lista de hormigas
 }
