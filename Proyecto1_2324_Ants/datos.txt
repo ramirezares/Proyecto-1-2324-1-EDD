@@ -1,0 +1,5 @@
+jTextField1: 0
+jTextField2: 0
+jTextField3: 00
+jTextField4: 0
+jTextField5: 0
