@@ -3,16 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package _06_Interfaces;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
+
+import _02_EDD.SimpleNode;
+import _02_EDD.Vertex;
+import _05_Validations.Validations;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author blanf
+ * @author blanf & AresR
  */
 public class SimulateDates extends javax.swing.JFrame {
 
@@ -21,7 +20,7 @@ public class SimulateDates extends javax.swing.JFrame {
      */
     public SimulateDates() {
         initComponents();
-        this.setLocationRelativeTo(null);        
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -34,8 +33,10 @@ public class SimulateDates extends javax.swing.JFrame {
     private void initComponents() {
 
         jComboBox1 = new javax.swing.JComboBox<>();
+        jSlider1 = new javax.swing.JSlider();
+        jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        simulate = new javax.swing.JButton();
+        bnSimulate = new javax.swing.JButton();
         back = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -43,17 +44,21 @@ public class SimulateDates extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jComboBox5 = new javax.swing.JComboBox<>();
+        titleStartVertex = new javax.swing.JLabel();
+        titleEndVertex = new javax.swing.JLabel();
+        StartVertex = new javax.swing.JComboBox<>();
+        EndVertex = new javax.swing.JComboBox<>();
+        alfaValues = new javax.swing.JComboBox<>();
+        betaValues = new javax.swing.JComboBox<>();
+        rhoValue = new javax.swing.JTextField();
+        titleRecomendation = new javax.swing.JLabel();
+        Refresh = new javax.swing.JButton();
+        cyclesNumber = new javax.swing.JTextField();
+        antsNumber = new javax.swing.JTextField();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,11 +66,11 @@ public class SimulateDates extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Datos para la simulación");
 
-        simulate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        simulate.setText("Simular");
-        simulate.addActionListener(new java.awt.event.ActionListener() {
+        bnSimulate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        bnSimulate.setText("Simular");
+        bnSimulate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                simulateActionPerformed(evt);
+                bnSimulateActionPerformed(evt);
             }
         });
 
@@ -84,7 +89,7 @@ public class SimulateDates extends javax.swing.JFrame {
         jLabel3.setText("- Número de hormigas");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("- Valores :");
+        jLabel4.setText("- Valores para simular:");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -98,43 +103,27 @@ public class SimulateDates extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("ρ");
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel8.setText("- Ciudad de partida");
+        titleStartVertex.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        titleStartVertex.setText("- Ciudad de partida");
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel9.setText("-Ciudad de llegada");
+        titleEndVertex.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        titleEndVertex.setText("-Ciudad de llegada");
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        alfaValues.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", " " }));
+
+        betaValues.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "3", "4", "5", " " }));
+
+        rhoValue.setText("0.5");
+
+        titleRecomendation.setForeground(new java.awt.Color(153, 153, 153));
+        titleRecomendation.setText("Se recomienda no modificar estos valores");
+
+        Refresh.setText("Actualizar ciudades");
+        Refresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                RefreshActionPerformed(evt);
             }
         });
-
-        jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
-            }
-        });
-
-        jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
-            }
-        });
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -148,22 +137,38 @@ public class SimulateDates extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(back)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(simulate))
+                                .addComponent(bnSimulate))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(15, 15, 15)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(rhoValue, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(betaValues, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(alfaValues, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(titleEndVertex, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(titleStartVertex, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(StartVertex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(EndVertex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(Refresh))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(titleRecomendation)
+                                            .addComponent(antsNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,21 +179,9 @@ public class SimulateDates extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 76, Short.MAX_VALUE)))
+                                .addComponent(cyclesNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,36 +191,44 @@ public class SimulateDates extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cyclesNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                    .addComponent(antsNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(titleRecomendation, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
+                    .addComponent(alfaValues, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(betaValues, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(rhoValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(titleStartVertex)
+                            .addComponent(StartVertex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(titleEndVertex)
+                            .addComponent(EndVertex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Refresh)
+                        .addGap(54, 54, 54)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(simulate)
+                    .addComponent(bnSimulate)
                     .addComponent(back))
                 .addContainerGap())
         );
@@ -236,81 +237,70 @@ public class SimulateDates extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-    Menu a = new Menu();
-    a.setVisible(true);
-    this.setVisible(false);
+        Menu menuWindow = new Menu();
+        menuWindow.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_backActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-    Scanner sc = new Scanner(jTextField1.getText()); 
-    if (sc.hasNextDouble()) { 
-        double numero = sc.nextDouble(); 
-    } else { 
-        JOptionPane.showMessageDialog(this, "Por favor, ingrese un número.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-    sc.close();       
-    
-    jTextField3.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            jTextField3.transferFocus();
+    private void bnSimulateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnSimulateActionPerformed
+        Validations checker = new Validations();
+
+        if (checker.isNumOfCycles(this.cyclesNumber.getText()) && checker.isNumOfAnts(this.antsNumber.getText()) && checker.RhoInRange(this.rhoValue.getText())) {
+            if (!checker.StringIsEmpty(this.StartVertex.getSelectedItem().toString()) && !checker.StringIsEmpty(this.EndVertex.getSelectedItem().toString())) {
+                if (checker.numsNotEquals(this.StartVertex.getSelectedItem().toString(), this.EndVertex.getSelectedItem().toString())) {
+                    Simulation simulationWindouw = new Simulation();
+
+                    int alfaVal = Integer.parseInt(this.alfaValues.getSelectedItem().toString());
+                    int betaVal = Integer.parseInt(this.betaValues.getSelectedItem().toString());
+                    double rhoVal = Double.parseDouble(this.rhoValue.getText());
+
+                    Simulation.GraphOfSimulation = Menu.GraphOfProgram;
+                    Simulation.NumberOfCyclesToCompleteSimulation = Integer.parseInt(this.cyclesNumber.getText());
+                    Simulation.antNumberToSimulation = Integer.parseInt(this.antsNumber.getText());
+                    Simulation.alfaValueToSimulation = alfaVal;
+                    Simulation.betaValueToSimulation = betaVal;
+                    Simulation.rhoValueToSimulation = rhoVal;
+
+                    int numOfStartVertex = Integer.parseInt(this.StartVertex.getSelectedItem().toString());
+                    int numOfEndVertex = Integer.parseInt(this.EndVertex.getSelectedItem().toString());
+
+                    Vertex StartV = Menu.GraphOfProgram.SearchVertexInGraphWithNum(numOfStartVertex);
+                    Vertex EndV = Menu.GraphOfProgram.SearchVertexInGraphWithNum(numOfEndVertex);
+
+                    Simulation.StartVertexToSimulation = StartV;
+                    Simulation.EndVertexToSimulation = EndV;
+
+                    simulationWindouw.setVisible(true);
+                    this.setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Datos invalidos, ingrese una ciudad de llegada distinta a la de partida.");
+
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Datos invalidos, las ciudades de partida y llegada no pueden estar vacias. Use el boton actualizar.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Datos invalidos, ingrese datos validos.");
         }
-    });    
-    }//GEN-LAST:event_jTextField3ActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-    Scanner sc = new Scanner(jTextField1.getText()); 
-    if (sc.hasNextDouble()) { 
-        double numero = sc.nextDouble(); 
-    } else { 
-        JOptionPane.showMessageDialog(this, "Por favor, ingrese un número.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-    sc.close();   
-    
-    jTextField4.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            jTextField4.transferFocus();
+    }//GEN-LAST:event_bnSimulateActionPerformed
+
+    private void RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshActionPerformed
+        StringBuilder txt = new StringBuilder();
+        String item;
+
+        this.StartVertex.removeAll();
+        this.EndVertex.removeAll();
+
+        for (SimpleNode pNode = Menu.GraphOfProgram.getListofVertex().GetpFirst(); pNode != null; pNode = pNode.GetNxt()) {
+            Vertex v = (Vertex) pNode.GetData();
+            item = String.valueOf(v.GetNumVertex());
+            txt.append(item).append(",");
+            this.StartVertex.addItem(item);
+            this.EndVertex.addItem(item);
         }
-    });    
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_RefreshActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-    Scanner sc = new Scanner(jTextField1.getText()); 
-    if (sc.hasNextDouble()) { 
-        double numero = sc.nextDouble(); 
-    } else { 
-        JOptionPane.showMessageDialog(this, "Por favor, ingrese un número.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-    sc.close();
-    
-    jTextField5.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            jTextField5.transferFocus();
-        }
-    });
-    }//GEN-LAST:event_jTextField5ActionPerformed
-
-    private void simulateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulateActionPerformed
-    try {
-        FileWriter fw = new FileWriter("datos.txt", false); 
-        fw.write("jTextField1: " + jTextField1.getText() + "\n");
-        fw.write("jTextField2: " + jTextField2.getText() + "\n");
-        fw.write("jTextField3: " + jTextField3.getText() + "\n");
-        fw.write("jTextField4: " + jTextField4.getText() + "\n");
-        fw.write("jTextField5: " + jTextField5.getText() + "\n");
-        fw.close();
-        
-        JOptionPane.showMessageDialog(this, "La información se ha guardado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(this, "Ha ocurrido un error al guardar la información. " ,"Error", JOptionPane.ERROR_MESSAGE);
-    }
-    }//GEN-LAST:event_simulateActionPerformed
-
-
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -362,12 +352,16 @@ public class SimulateDates extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> EndVertex;
+    private javax.swing.JButton Refresh;
+    private javax.swing.JComboBox<String> StartVertex;
+    private javax.swing.JComboBox<String> alfaValues;
+    private javax.swing.JTextField antsNumber;
     private javax.swing.JButton back;
+    private javax.swing.JComboBox<String> betaValues;
+    private javax.swing.JButton bnSimulate;
+    private javax.swing.JTextField cyclesNumber;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -375,11 +369,11 @@ public class SimulateDates extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JButton simulate;
+    private javax.swing.JSlider jSlider1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField rhoValue;
+    private javax.swing.JLabel titleEndVertex;
+    private javax.swing.JLabel titleRecomendation;
+    private javax.swing.JLabel titleStartVertex;
     // End of variables declaration//GEN-END:variables
 }

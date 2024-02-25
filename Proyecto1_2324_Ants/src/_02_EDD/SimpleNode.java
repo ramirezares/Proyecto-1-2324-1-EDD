@@ -17,7 +17,6 @@ public class SimpleNode<A> implements ISimpleNode<A> {
     private A Data;
     private SimpleNode Nxt;
     
-    
     public SimpleNode(){
         this.Data=null;
         this.Nxt=null;

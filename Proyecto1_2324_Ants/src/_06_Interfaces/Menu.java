@@ -6,6 +6,7 @@ package _06_Interfaces;
 
 import _02_EDD.UndirectedGraph;
 import _04_Functions.Function03SaveInTXT;
+import _04_Functions.Function06ViewWithGraphStream;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author blanf
  */
 public class Menu extends javax.swing.JFrame {
-
+    
     public static UndirectedGraph GraphOfProgram = new UndirectedGraph();
 
     /**
@@ -24,7 +25,7 @@ public class Menu extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -163,6 +164,7 @@ public class Menu extends javax.swing.JFrame {
     private void LoadGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadGraphActionPerformed
         Load loadWindow = new Load();
         loadWindow.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_LoadGraphActionPerformed
 
     private void NewSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewSimulationActionPerformed
@@ -171,38 +173,34 @@ public class Menu extends javax.swing.JFrame {
             SimulateDates simulateDates = new SimulateDates();
             simulateDates.setVisible(true);
             this.setVisible(false);
-            Simulation simulateWindouw = new Simulation();
-            //simulateWindouw // Implementar JFrame Simulation
-                    
+            
         } else {
             JOptionPane.showMessageDialog(null, "Carge un grafo antes por favor.");
         }
     }//GEN-LAST:event_NewSimulationActionPerformed
 
     private void ShowGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowGraphActionPerformed
-
-        if (!GraphOfProgram.IsGraphEmpty()) {
-
-            Show showWindow = new Show();
-            showWindow.setVisible(true);
-            this.setVisible(false);
-            //showWindow //Implementar Libreria
-                
-        } else {
-            JOptionPane.showMessageDialog(null, "Carge un grafo antes por favor.");
+        
+          if (!GraphOfProgram.IsGraphEmpty()) {
+          Function06ViewWithGraphStream temporalFunction = new Function06ViewWithGraphStream();
+          temporalFunction.visualizeGraph(GraphOfProgram);
+          Show showWindow = new Show(); showWindow.setVisible(true);
+          this.setVisible(false); //showWindow //Implementar Libreria
+         
+          } else { JOptionPane.showMessageDialog(null, "Carge un grafo antes por favor.");
         }
     }//GEN-LAST:event_ShowGraphActionPerformed
 
     private void SaveGraphInTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveGraphInTXTActionPerformed
-
+        
         Function03SaveInTXT txtToSave = new Function03SaveInTXT();
         txtToSave.txtToSave(GraphOfProgram);
         
-        
+
     }//GEN-LAST:event_SaveGraphInTXTActionPerformed
 
     private void CloseProgramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseProgramActionPerformed
-        System.out.println(GraphOfProgram.ShowGraphSummary());;                 // Eliminar al final
+        System.out.println(GraphOfProgram.ShowGraphSummary());
         System.exit(0);
     }//GEN-LAST:event_CloseProgramActionPerformed
 

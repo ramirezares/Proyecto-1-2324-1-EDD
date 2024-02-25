@@ -173,8 +173,7 @@ public class UndirectedGraph implements IUndirectedGraph {
      * contrario un nodo vacío.
      */
     @Override
-    public SimpleNode SearchArcInVertexInGraph(Vertex vertex, UndirectedGraphArc arc
-    ) {
+    public SimpleNode SearchArcInVertexInGraph(Vertex vertex, UndirectedGraphArc arc) {
         SimpleNode pNodeArcToReturn = new SimpleNode();
         if (IsVertexInGraph(vertex)) {
             Vertex VertexToReview = (Vertex) SearchVertexInGraph(vertex).GetData();
@@ -331,7 +330,8 @@ public class UndirectedGraph implements IUndirectedGraph {
     /**
      * Elimina las aristas que apuntan al vertice indicado.
      *
-     * @param numOfVertex
+     * @param numOfVertex El vertice al cual apuntan las aristas que se desean
+     * eliminar.
      * @return
      */
     public boolean DelArcInVertexInGraphWithNumberOfVertex(int numOfVertex) {
@@ -347,5 +347,23 @@ public class UndirectedGraph implements IUndirectedGraph {
             }
         }
         return val;
+    }
+    
+    public UndirectedGraphArc SearchArcInVertexInGraphWithNumOfDestinationVertex(int numOfNextVertex){
+        UndirectedGraphArc arcToReturn = null;
+        
+        if(this.isVertexInGraphWithNum(numOfNextVertex)){
+            Vertex VertexToReview = (Vertex) this.SearchVertexInGraphWithNum(numOfNextVertex);
+            for(SimpleNode pNodeOfArcs=VertexToReview.GetListAdy().GetpFirst();
+                    pNodeOfArcs!=null;
+                    pNodeOfArcs=pNodeOfArcs.GetNxt()){
+                UndirectedGraphArc arcInNode = (UndirectedGraphArc) pNodeOfArcs.GetData();
+                if(arcInNode.GetDestination()==numOfNextVertex){
+                    arcToReturn = arcInNode;
+                    
+                }
+            }
+        }        
+        return arcToReturn;
     }
 }

@@ -20,36 +20,42 @@ public class Function02Load { // desde un txt convertirlo a grafo
         UndirectedGraph graphToReturn = new UndirectedGraph();
 
         textToGraph = textToGraph.replace("\r", "");
+
         String[] lines = textToGraph.split("\n");
-        boolean readVertices = false;
+
+        boolean readVertices = true;
 
         if (!textToGraph.isBlank()) {
             for (String line : lines) {
-                if (line.equals("ciudad")) {            //validacion string == string por cada caracter
-                    readVertices = true;
-                } else if (line.equals("aristas")) {        // tambien
+                if (line.equals("aristas")) {
                     readVertices = false;
-                } else {
-                    if (readVertices) {
+                    continue;
+                }
+                if (readVertices) {
+                    if (!line.equals("ciudad")) {
                         int vertexNum = Integer.parseInt(line);
                         Vertex v = new Vertex(vertexNum);
                         graphToReturn.AddVertex(v);
-                    } else {
-                        String[] ForArc = line.split(",");
-                        int origin = Integer.parseInt(ForArc[0]);
-                        int destination = Integer.parseInt(ForArc[1]);
-                        double weight = Double.parseDouble(ForArc[2]);
-                        for (SimpleNode pNode = graphToReturn.getListofVertex().GetpFirst();
-                                pNode != null;
-                                pNode = pNode.GetNxt()) {
-                            Vertex vertex = (Vertex) pNode.GetData();
+                    }
+
+                } else {
+                    String[] ForArc = line.split(",");
+                    int origin = Integer.parseInt(ForArc[0]);
+                    int destination = Integer.parseInt(ForArc[1]);
+                    double weight = Double.parseDouble(ForArc[2]);
+
+                    for (SimpleNode pNode = graphToReturn.getListofVertex().GetpFirst();
+                            pNode != null;
+                            pNode = pNode.GetNxt()) {
+                        Vertex vertex = (Vertex) pNode.GetData();
+                        if (vertex.GetNumVertex() == origin) {
                             UndirectedGraphArc Arc = new UndirectedGraphArc(origin, destination, weight);
                             graphToReturn.AddArcToVertexInGraph(vertex, Arc);
                         }
+
                     }
                 }
             }
-            JOptionPane.showMessageDialog(null, "Cargado exitoso. Regrese al menu para iniciar la simulacion.");
         }
         return graphToReturn;
     }

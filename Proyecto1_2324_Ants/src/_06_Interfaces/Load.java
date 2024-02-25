@@ -4,9 +4,7 @@
  */
 package _06_Interfaces;
 
-import _02_EDD.UndirectedGraph;
 import _04_Functions.Function02Load;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -128,8 +126,11 @@ public class Load extends javax.swing.JFrame {
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
 
         Function02Load temporalForCreateGraph = new Function02Load();
-        try {    
+        try {
             Menu.GraphOfProgram = temporalForCreateGraph.graphToReturn(textArea.getText());
+            if (!Menu.GraphOfProgram.IsGraphEmpty()){
+                JOptionPane.showMessageDialog(null, "Cargado exitoso. Regrese al menu para iniciar la simulacion.");
+            }
         } catch (NumberFormatException err) {
             JOptionPane.showMessageDialog(null, "No es posible convertir este archivo. Estructura incorrecta.");
         }

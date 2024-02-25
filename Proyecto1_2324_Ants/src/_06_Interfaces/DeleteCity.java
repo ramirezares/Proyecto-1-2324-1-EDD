@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author blanf
+ * @author blanf & AresR
  */
 public class DeleteCity extends javax.swing.JFrame {
 

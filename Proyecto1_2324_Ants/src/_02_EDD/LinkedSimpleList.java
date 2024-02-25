@@ -36,15 +36,11 @@ public class LinkedSimpleList<A> implements ILinkedList<A> {
      */
     @Override
     public boolean isEmpty() {
-        boolean val;
+        boolean val=false;
         if (this.size==0){
             val=true;
-            return val;
         }
-        else{
-            val=false;
-            return val;
-        }
+        return val;
     }
     
     /**
@@ -173,35 +169,43 @@ public class LinkedSimpleList<A> implements ILinkedList<A> {
 
     /**
      * Busca y devuelve el nodo que se encuentra en un indice indicado.
-     * @param n Representa el numero del indice de la lista que se desea obtener
+     * @param index Representa el numero del indice de la lista que se desea obtener
      * @return  Retorna el nodo que se encuentra en la posicion indicada, si esta posicion
      * existe dentro de la lista, es decir, si la posicion indicada pertenece al conjunto 
      * de numeros que se encuentran entre 0 y el tamaño de la lista. De lo contrario, si 
      * la lista esta vacia o si el indice indicado no se encuentra en la lista, retorna null
      */
     @Override
-    public SimpleNode GetValInIndex(int n) {
+    public SimpleNode GetValInIndex(int index) {
         SimpleNode matched;
         if (this.size>0){
-            if(n<=this.size){
+            if(index<=this.size){
                 int aux=0;
                 for (SimpleNode pNode=this.pFirst;pNode!=null;pNode=pNode.GetNxt()){
-                    if (aux==n){
+                    if (aux==index){
                         matched=pNode;
                         return matched;
                     }
+                    aux++;
                 }
-                    
-            }else{
-            System.out.println("Indice invalido. No esta en la lista");
-            return null;
-            }            
-        }
-        else{
-            System.out.println("La lista no tiene elementos");
-            return null;
+            }
         }
         return null;
+    }
+    
+    public void SetValInIndex(int index,A newData){
+        if (this.size>0){
+            if(index<=this.size){
+                int aux=1;
+                for (SimpleNode pNode=this.pFirst;pNode!=null;pNode=pNode.GetNxt()){
+                    if (aux==index){
+                        pNode.SetData(newData);
+                        break;
+                    }
+                    aux++;
+                }
+            }
+        }
     }
 
     /**

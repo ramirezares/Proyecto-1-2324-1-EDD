@@ -6,7 +6,7 @@ package _02_EDD;
 
 /**
  * Clase Vertex
- * Esta clase define el objeto grafo y su comportamiento, con sus atributos numVertex
+ * Esta clase define el objeto Vertice y su comportamiento, con sus atributos numVertex
  * y listAdy, que corresponden al identificador del vertice y a la lista de arcos.
  * @author AresR
  * @version 20/02/2024
@@ -143,5 +143,18 @@ public class Vertex implements IVertex{
     @Override
     public void SetListAdy(LinkedSimpleList listAdy) {
         this.listAdy = listAdy;
+    }
+    
+    public UndirectedGraphArc SearchArcwithNumOfVertexs(int numOfDestinationVertex){
+        UndirectedGraphArc ArcToReturn = null;
+        for (SimpleNode pNodeOfArcs=this.listAdy.GetpFirst();
+                pNodeOfArcs!=null;
+                pNodeOfArcs=pNodeOfArcs.GetNxt()) {
+            UndirectedGraphArc arcInNode = (UndirectedGraphArc) pNodeOfArcs.GetData();
+            if (arcInNode.GetDestination()==numOfDestinationVertex) {
+                ArcToReturn=arcInNode;
+            }
+        }
+        return ArcToReturn;
     }
 }

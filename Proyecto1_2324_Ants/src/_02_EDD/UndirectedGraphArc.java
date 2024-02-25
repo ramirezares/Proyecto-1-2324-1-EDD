@@ -5,8 +5,12 @@
 package _02_EDD;
 
 /**
- *
+ * Clase UndirectedGraphArc
+ * Esta clase define el objeto Arc y su comportamiento, con sus origin,
+ * destination, weight y pheromones. Siendo pFirst y pLast de la clase SimpleNode.
+ * 
  * @author AresR
+ * @version 21/02/2024
  */
 public class UndirectedGraphArc implements IUndirectedGraphArc {
 
@@ -14,8 +18,6 @@ public class UndirectedGraphArc implements IUndirectedGraphArc {
     private int destination;
     private double weight; 
     private double pheromones;
-   
-    
    
     /**
      * INstancia la clase UndirectedGraphArc. Inicializa el origen y destino del arco 

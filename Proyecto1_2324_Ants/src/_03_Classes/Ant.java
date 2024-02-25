@@ -5,7 +5,7 @@
 package _03_Classes;
 
 import _02_EDD.LinkedSimpleList;
-import _02_EDD.UndirectedGraph;
+import _02_EDD.SimpleNode;
 import _02_EDD.Vertex;
 
 /**
@@ -13,44 +13,34 @@ import _02_EDD.Vertex;
  * @author AresR
  */
 public class Ant {
-    
+
     // vertex vertice actual
     // linkedlist vertices visitados
     // double distancia recorrida
-    
-        
     private Vertex currentVertex;
-    private LinkedSimpleList VertexVisited;
+    private LinkedSimpleList<Vertex> VertexsTraveled;
     private double totalDistanceTraveled;
 
-    public Ant() {
-        this.currentVertex = null;
-        this.VertexVisited = new LinkedSimpleList();
+    public Ant(Vertex currentVertex) {
+        this.currentVertex = currentVertex;
+        this.VertexsTraveled = new LinkedSimpleList();
         this.totalDistanceTraveled = 0;
     }
 
-    public void move(int numOfCity, double distance){   //Hacerlo con numOfCity. Usar la funcion de grafo 
-        
-                
-    }
-    
-    // EL profe dijo que metodo para ciudades posibles
-    
-    
-    public Vertex getCurrentCity() {
+    public Vertex getCurrentVertex() {
         return currentVertex;
     }
 
-    public void setCurrentCity(Vertex nCurrentVertex) {
+    public void setCurrentVertex(Vertex nCurrentVertex) {
         this.currentVertex = nCurrentVertex;
     }
 
-    public LinkedSimpleList getVertexVisited() {
-        return VertexVisited;
+    public LinkedSimpleList getVertexsTraveled() {
+        return VertexsTraveled;
     }
 
-    public void setVertexVisited(LinkedSimpleList VertexVisited) {
-        this.VertexVisited = VertexVisited;
+    public void setVertexsTraveled(LinkedSimpleList VertexsTraveled) {
+        this.VertexsTraveled = VertexsTraveled;
     }
 
     public double getTotalDistanceTraveled() {
@@ -60,6 +50,36 @@ public class Ant {
     public void setTotalDistanceTraveled(double totalDistanceTraveled) {
         this.totalDistanceTraveled = totalDistanceTraveled;
     }
+
+    public boolean isVisitedVertex(Vertex vertexToVerify) {
+        boolean val = false;
+        if (this.VertexsTraveled.GetSize() > 0) {
+            for (SimpleNode pNodeOfVertexs = this.VertexsTraveled.GetpFirst();
+                    pNodeOfVertexs != null;
+                    pNodeOfVertexs = pNodeOfVertexs.GetNxt()) {
+                Vertex vertex = (Vertex) pNodeOfVertexs.GetData();
+                if (vertex.GetNumVertex() == vertexToVerify.GetNumVertex()) {
+                    val = true;
+                }
+            }
+
+        }
+        return val;
+    }
     
+    public boolean verifyAmongVisitedVertexs(int numVertexToVerify){
+        for (int i = 0; i < this.VertexsTraveled.GetSize(); i++) {
+            Vertex vertexInNode= (Vertex) this.VertexsTraveled.GetValInIndex(i).GetData();
+            if(vertexInNode.GetNumVertex() == numVertexToVerify){
+               return true;
+           }
+        }
+        return false;
     
+    }
+    
+    public String ToSummary() {
+        return "Hormiga:" + "ciudadesRecorridas=" + this.VertexsTraveled.GetSize()+ ", distanciaRecorrida=" + this.totalDistanceTraveled + ", ciudadActual=" +this.currentVertex.GetNumVertex()+ '.';
+    }
+
 }

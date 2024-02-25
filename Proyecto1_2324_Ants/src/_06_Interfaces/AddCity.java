@@ -9,11 +9,12 @@ import _02_EDD.UndirectedGraph;
 import _02_EDD.UndirectedGraphArc;
 import _02_EDD.Vertex;
 import _04_Functions.Function04AddCity;
+import _05_Validations.Validations;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author blanf
+ * @author blanf & Ares Ramirez
  */
 public class AddCity extends javax.swing.JFrame {
 
@@ -24,7 +25,7 @@ public class AddCity extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        
+
     }
 
     /**
@@ -194,19 +195,19 @@ public class AddCity extends javax.swing.JFrame {
         Modify ModifyWindow = new Modify();
         ModifyWindow.setVisible(true);
         this.setVisible(false);
-        
+
     }//GEN-LAST:event_backActionPerformed
 
     private void buttonAddCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddCityActionPerformed
-        
+
         UndirectedGraph temporalGraph;
-        
+
         Function04AddCity temporalFunction = new Function04AddCity();
-        
+
         temporalGraph = temporalFunction.AddCityToVertex(Menu.GraphOfProgram, identierOfCity.getSelectedItem().toString());
-        
+
         if (temporalGraph != null) {
-            JOptionPane.showMessageDialog(null, "Agregado.");
+            JOptionPane.showMessageDialog(null, "Ciudad agregada.");
             Menu.GraphOfProgram = temporalGraph;
         } else {
             JOptionPane.showMessageDialog(null, "Ya se encuentra en el grafo.");
@@ -217,29 +218,40 @@ public class AddCity extends javax.swing.JFrame {
     private void buttonAddArcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddArcActionPerformed
         int origin, destination;
         double weight;
-        UndirectedGraph temporalGraph;
-        Function04AddCity temporalFunction = new Function04AddCity();
-        
-        origin = Integer.parseInt(this.origins.getSelectedItem().toString());
-        destination = Integer.parseInt(this.destinations.getSelectedItem().toString());
-        weight = Double.parseDouble(this.textFieldWeight.getText());
-        UndirectedGraphArc Arc = new UndirectedGraphArc(origin,destination,weight);
-        temporalGraph = temporalFunction.AddArcToVertexWithAtributes(Menu.GraphOfProgram, Arc);
-        
-        if (temporalGraph != null) {
-            Menu.GraphOfProgram = temporalGraph;
+        Validations checker = new Validations();
+
+        if (checker.isDistance(this.textFieldWeight.getText())) {
+            if (checker.numsNotEquals(this.origins.getSelectedItem().toString(), this.destinations.getSelectedItem().toString())) {
+                UndirectedGraph temporalGraph;
+                Function04AddCity temporalFunction = new Function04AddCity();
+
+                origin = Integer.parseInt(this.origins.getSelectedItem().toString());
+                destination = Integer.parseInt(this.destinations.getSelectedItem().toString());
+                weight = Double.parseDouble(this.textFieldWeight.getText());
+                UndirectedGraphArc Arc = new UndirectedGraphArc(origin, destination, weight);
+                temporalGraph = temporalFunction.AddArcToVertexWithAtributes(Menu.GraphOfProgram, Arc);
+
+                if (temporalGraph != null) {
+                    Menu.GraphOfProgram = temporalGraph;
+                    JOptionPane.showMessageDialog(null, "Camino agregado.");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ya se encuentra en el grafo.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Camino invalido, origen y destino son iguales.");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Ya se encuentra en el grafo.");
+            JOptionPane.showMessageDialog(null, "Distancia invalida.");
         }
     }//GEN-LAST:event_buttonAddArcActionPerformed
 
     private void bnRefreshCitiesListsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnRefreshCitiesListsActionPerformed
         StringBuilder txt = new StringBuilder();
         String item;
-        
+
         this.origins.removeAll();
         this.origins.removeAll();
-        
+
         for (SimpleNode pNode = Menu.GraphOfProgram.getListofVertex().GetpFirst(); pNode != null; pNode = pNode.GetNxt()) {
             Vertex v = (Vertex) pNode.GetData();
             item = String.valueOf(v.GetNumVertex());

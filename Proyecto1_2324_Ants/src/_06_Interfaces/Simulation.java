@@ -4,17 +4,52 @@
  */
 package _06_Interfaces;
 
+import _02_EDD.LinkedSimpleList;
+import _02_EDD.UndirectedGraph;
+import _02_EDD.Vertex;
+import _03_Classes.AntSystemCycle;
+import _04_Functions.Function01Simulation;
+import _04_Functions.Function06ViewWithGraphStream;
+import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
+import org.graphstream.ui.swing_viewer.ViewPanel;
+
 /**
  *
  * @author AresR
  */
 public class Simulation extends javax.swing.JFrame {
 
+    public static UndirectedGraph GraphOfSimulation = new UndirectedGraph();
+    public static int NumberOfCyclesToCompleteSimulation = 0;
+    public static int antNumberToSimulation = 0;
+    public static int alfaValueToSimulation = 0;
+    public static int betaValueToSimulation = 0;
+    public static double rhoValueToSimulation = 0;
+    public static Vertex StartVertexToSimulation = new Vertex(0);
+    public static Vertex EndVertexToSimulation = new Vertex(0);
+
+    public static LinkedSimpleList listOfAntsToSimulation = new LinkedSimpleList();
+    public static int CurrentCycleToSimulation = 0;
+    public static boolean Prepared = false;
+    public static AntSystemCycle currentSimulation = new AntSystemCycle();
+
     /**
      * Creates new form Simulation
      */
     public Simulation() {
         initComponents();
+        this.setVisible(true);
+
+        Function06ViewWithGraphStream graphVisualizer = new Function06ViewWithGraphStream();
+        ViewPanel graphViewPanel = graphVisualizer.visualizeGraph(GraphOfSimulation);
+
+        PanelToGraphStream.add(graphViewPanel); //Desde aca
+        PanelToGraphStream.setVisible(true);
+        PanelToGraphStream.setLayout(new BorderLayout());          // Ver por que no muestra el grafo. Investigar si se puede con JLabel
+        PanelToGraphStream.revalidate();                          //Investigar Panel y viewer
+        PanelToGraphStream.repaint();
+        this.pack();                    //Hasta aca
     }
 
     /**
@@ -27,59 +62,146 @@ public class Simulation extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        RefreshAndPrepareSimulation = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        GoToMenu = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         textAreaToSummaryPerCycle = new javax.swing.JTextArea();
+        titleCurrentCycle = new javax.swing.JLabel();
+        titleAntsNumber = new javax.swing.JLabel();
+        currentCycle = new javax.swing.JTextField();
+        AntsNumber = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        StartCicle = new javax.swing.JButton();
+        PanelToGraphStream = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        RefreshAndPrepareSimulation.setText("Actualizar e iniciar simulacion");
+        RefreshAndPrepareSimulation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefreshAndPrepareSimulationActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 580, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(RefreshAndPrepareSimulation)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 19, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(RefreshAndPrepareSimulation)
+                .addGap(0, 37, Short.MAX_VALUE))
         );
+
+        GoToMenu.setText("Volver al menu");
+        GoToMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GoToMenuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 194, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 137, Short.MAX_VALUE)
+                .addComponent(GoToMenu))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(GoToMenu)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         textAreaToSummaryPerCycle.setColumns(20);
         textAreaToSummaryPerCycle.setRows(5);
         jScrollPane1.setViewportView(textAreaToSummaryPerCycle);
 
+        titleCurrentCycle.setText("Numero del ciclo actual:");
+
+        titleAntsNumber.setText("Numero de hormigas:");
+
+        currentCycle.setText("0");
+
+        AntsNumber.setText("0");
+
+        jLabel1.setText("Simulacion del ");
+
+        StartCicle.setText("Iniciar ciclo");
+        StartCicle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StartCicleActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelToGraphStreamLayout = new javax.swing.GroupLayout(PanelToGraphStream);
+        PanelToGraphStream.setLayout(PanelToGraphStreamLayout);
+        PanelToGraphStreamLayout.setHorizontalGroup(
+            PanelToGraphStreamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        PanelToGraphStreamLayout.setVerticalGroup(
+            PanelToGraphStreamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PanelToGraphStream, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(titleCurrentCycle)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(currentCycle, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(titleAntsNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(AntsNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
+                                .addComponent(StartCicle)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PanelToGraphStream, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(titleCurrentCycle)
+                            .addComponent(titleAntsNumber)
+                            .addComponent(currentCycle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AntsNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(StartCicle))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -87,6 +209,63 @@ public class Simulation extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void GoToMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoToMenuActionPerformed
+        Prepared = false;
+        Menu menuWindow = new Menu();
+        menuWindow.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_GoToMenuActionPerformed
+
+    private void StartCicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartCicleActionPerformed
+
+        if (Prepared) {
+            if (CurrentCycleToSimulation < NumberOfCyclesToCompleteSimulation) {
+                Function01Simulation temporalFunction = new Function01Simulation();
+                CurrentCycleToSimulation++;
+                this.currentCycle.setText(String.valueOf(CurrentCycleToSimulation));
+
+                this.textAreaToSummaryPerCycle.append("\n");
+                this.textAreaToSummaryPerCycle.append(currentSimulation.eachCycle(currentSimulation.getListOfAnts(), CurrentCycleToSimulation));
+                currentSimulation.restartAnts();
+
+                this.textAreaToSummaryPerCycle.append("\n");
+                this.textAreaToSummaryPerCycle.append("Distancia mas corta: ");
+                this.textAreaToSummaryPerCycle.append(String.valueOf(currentSimulation.getBestDistance()));
+                this.textAreaToSummaryPerCycle.append(". Camino mas corto: ");
+                this.textAreaToSummaryPerCycle.append(temporalFunction.FormatTxtToBestRouteArcs(currentSimulation.getBestRouteArcs()));
+                this.textAreaToSummaryPerCycle.append("\n");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Simulacion finalizada.");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Actualice e inicie la simulacion primero.");
+        }
+
+    }//GEN-LAST:event_StartCicleActionPerformed
+
+    private void RefreshAndPrepareSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshAndPrepareSimulationActionPerformed
+        if (!Prepared) {
+            Function01Simulation temporalFunction = new Function01Simulation();
+
+            LinkedSimpleList listOfAnts = temporalFunction.makeListOfAnts(Simulation.antNumberToSimulation, StartVertexToSimulation);
+            listOfAntsToSimulation = listOfAnts;
+
+            AntSystemCycle simulation = new AntSystemCycle(GraphOfSimulation, listOfAntsToSimulation, alfaValueToSimulation, betaValueToSimulation, rhoValueToSimulation, CurrentCycleToSimulation, StartVertexToSimulation, EndVertexToSimulation);
+            currentSimulation = simulation;
+            currentSimulation = temporalFunction.inicializePheromones(currentSimulation);
+
+            String numOfAntsToshow = String.valueOf(antNumberToSimulation);
+            this.AntsNumber.setText(numOfAntsToshow);
+
+            Prepared = true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Ya se inició una simulacion. Regrese al menu principal para iniciar otra.");
+        }
+
+    }//GEN-LAST:event_RefreshAndPrepareSimulationActionPerformed
 
     /**
      * @param args the command line arguments
@@ -124,9 +303,18 @@ public class Simulation extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField AntsNumber;
+    private javax.swing.JButton GoToMenu;
+    private javax.swing.JPanel PanelToGraphStream;
+    private javax.swing.JButton RefreshAndPrepareSimulation;
+    private javax.swing.JButton StartCicle;
+    private javax.swing.JTextField currentCycle;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea textAreaToSummaryPerCycle;
+    private javax.swing.JLabel titleAntsNumber;
+    private javax.swing.JLabel titleCurrentCycle;
     // End of variables declaration//GEN-END:variables
 }

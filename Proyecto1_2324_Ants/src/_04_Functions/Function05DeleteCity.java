@@ -17,7 +17,6 @@ public class Function05DeleteCity {
         boolean val;
         
         val = GraphOfProgram.DelArcInVertexInGraphWithNumberOfVertex(numOfVertex);
-        System.out.println(numOfVertex);
         Vertex temporalVertex = (Vertex) GraphOfProgram.SearchVertexInGraphWithNum(numOfVertex);
         
         if(temporalVertex!=null){
@@ -26,7 +25,6 @@ public class Function05DeleteCity {
             val = false;
         }
         
-        System.out.println(val);
         if (val) {
             return GraphOfProgram;
         } else {
