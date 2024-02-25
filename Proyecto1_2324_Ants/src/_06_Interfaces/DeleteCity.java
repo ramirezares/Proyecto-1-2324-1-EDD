@@ -5,9 +5,7 @@
 package _06_Interfaces;
 
 import _02_EDD.SimpleNode;
-import _02_EDD.UndirectedGraph;
 import _02_EDD.Vertex;
-import _04_Functions.Function05DeleteCity;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,18 +31,18 @@ public class DeleteCity extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        titleDelete = new javax.swing.JLabel();
         bnRefresh = new javax.swing.JButton();
         back = new javax.swing.JButton();
-        CitiesOfGraph = new javax.swing.JComboBox<>();
+        cBoxCitiesOfGraph = new javax.swing.JComboBox<>();
         titleCities = new javax.swing.JLabel();
-        Cities = new javax.swing.JTextField();
+        textFieldCities = new javax.swing.JTextField();
         bnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setText("Eliminar grafo");
+        titleDelete.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        titleDelete.setText("Eliminar ciudad");
 
         bnRefresh.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         bnRefresh.setText("Actualizar");
@@ -80,7 +78,7 @@ public class DeleteCity extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 130, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(titleDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(125, 125, 125))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(back)
@@ -91,28 +89,28 @@ public class DeleteCity extends javax.swing.JFrame {
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(CitiesOfGraph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cBoxCitiesOfGraph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(bnDelete)
                                 .addGap(150, 150, 150))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(titleCities, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Cities, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(textFieldCities, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(30, 30, 30))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jLabel1)
+                .addComponent(titleDelete)
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(titleCities)
-                    .addComponent(Cities, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldCities, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CitiesOfGraph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cBoxCitiesOfGraph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bnDelete))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -134,30 +132,32 @@ public class DeleteCity extends javax.swing.JFrame {
         StringBuilder txt = new StringBuilder();
         String item;
 
-        this.CitiesOfGraph.removeAllItems();
+        this.cBoxCitiesOfGraph.removeAllItems();
 
         for (SimpleNode pNode = Menu.GraphOfProgram.getListofVertex().GetpFirst(); pNode != null; pNode = pNode.GetNxt()) {
             Vertex v = (Vertex) pNode.GetData();
             item = String.valueOf(v.GetNumVertex());
             txt.append(item).append(",");
-            this.CitiesOfGraph.addItem(item);
-            Cities.setText(txt.toString());
+            this.cBoxCitiesOfGraph.addItem(item);
+            textFieldCities.setText(txt.toString());
         }
     }//GEN-LAST:event_bnRefreshActionPerformed
 
     private void bnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteActionPerformed
-
-        Function05DeleteCity temporalFunction = new Function05DeleteCity();
-        int numVertex = Integer.parseInt(CitiesOfGraph.getSelectedItem().toString());
-        UndirectedGraph temporalGraph;
-
-        temporalGraph = temporalFunction.deleteVertexAndArcThatRefersToThat(Menu.GraphOfProgram, numVertex);
-        if (temporalGraph != null) {
-            JOptionPane.showMessageDialog(null, "Eliminado.");
-            Menu.GraphOfProgram = temporalGraph;
+        if (this.cBoxCitiesOfGraph.getSelectedItem() != null) {
+            
+            Menu.GraphOfProgram.DelArcInVertexInGraphWithNumberOfVertex(Integer.parseInt(this.cBoxCitiesOfGraph.getSelectedItem().toString()));
+            Vertex tem = Menu.GraphOfProgram.SearchVertexInGraphWithNum(Integer.parseInt(this.cBoxCitiesOfGraph.getSelectedItem().toString()));
+            boolean val = Menu.GraphOfProgram.DelVertexInGraph(tem);
+            
+            if (val) {
+                JOptionPane.showMessageDialog(null, "Eliminado.");
+            }
+            
         } else {
-            JOptionPane.showMessageDialog(null, "No se encuentra en el grafo.");
+            JOptionPane.showMessageDialog(null, "Actualice para eliminar una ciudad.");
         }
+
     }//GEN-LAST:event_bnDeleteActionPerformed
 
     /**
@@ -203,12 +203,12 @@ public class DeleteCity extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Cities;
-    private javax.swing.JComboBox<String> CitiesOfGraph;
     private javax.swing.JButton back;
     private javax.swing.JButton bnDelete;
     private javax.swing.JButton bnRefresh;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> cBoxCitiesOfGraph;
+    private javax.swing.JTextField textFieldCities;
     private javax.swing.JLabel titleCities;
+    private javax.swing.JLabel titleDelete;
     // End of variables declaration//GEN-END:variables
 }

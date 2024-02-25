@@ -63,6 +63,7 @@ public class AntSystemCycle {
         StringBuilder summaryOfCycle = new StringBuilder();
         summaryOfCycle.append("Ciclo ").append(NumberOfCycle).append(". Resumen de las hormigas:\n");
         summaryOfCycle.append(" ");
+
         for (int i = 0; i < listOfAntsToCycle.GetSize(); i++) {
             Ant antN = (Ant) listOfAntsToCycle.GetValInIndex(i).GetData();
             this.completeAntRoute(antN);
@@ -83,7 +84,10 @@ public class AntSystemCycle {
                     LinkedSimpleList probability = probabilityList(candidateVertexs);
                     UndirectedGraphArc arc = chooseNextVertex(probability, candidateVertexs);
                     Vertex vertexToMove = this.GraphOfSimulation.SearchVertexInGraphWithNum(arc.GetDestination());
-                    this.move(ant, vertexToMove, arc.GetWeight());
+                    if (!ant.verifyAmongVisitedVertexs(arc.GetDestination())){
+                        this.move(ant, vertexToMove, arc.GetWeight());
+                    }
+                    
                 }
             }
         }
@@ -105,6 +109,8 @@ public class AntSystemCycle {
 
         LinkedSimpleList<UndirectedGraphArc> candidateVertexs = new LinkedSimpleList<>();
         Vertex vertex = ant.getCurrentVertex();
+        
+        
         for (int i = 0; i < vertex.GetListAdy().GetSize(); i++) {
             UndirectedGraphArc Arc = (UndirectedGraphArc) vertex.GetListAdy().GetValInIndex(i).GetData();
             if (!ant.verifyAmongVisitedVertexs(Arc.GetDestination())) {
@@ -158,11 +164,10 @@ public class AntSystemCycle {
     public void restartAnts() {
         for (int i = 0; i < this.listOfAnts.GetSize(); i++) {
             Ant antReset = (Ant) this.listOfAnts.GetValInIndex(i).GetData();
-            
+
             antReset.setCurrentVertex(this.StartVertex);
             antReset.setVertexsTraveled(new LinkedSimpleList());
             antReset.setTotalDistanceTraveled(0.0);
-            this.listOfAnts.SetValInIndex(i, antReset);
         }
     }
 
@@ -170,9 +175,10 @@ public class AntSystemCycle {
     // Función de incrementación de feromonas en el camino
     public void increasePheromones(Ant ant) {
         double RoadVisibilityFactor = (1.0 / ant.getTotalDistanceTraveled());
-        for (int i = 0; i < ant.getVertexsTraveled().GetSize()-1; i++) {
+
+        for (int i = 0; i < ant.getVertexsTraveled().GetSize() - 1; i++) {
             Vertex auxVertex = (Vertex) ant.getVertexsTraveled().GetValInIndex(i).GetData();
-            Vertex nextAuxVertex = (Vertex) ant.getVertexsTraveled().GetValInIndex(i+1).GetData();
+            Vertex nextAuxVertex = (Vertex) ant.getVertexsTraveled().GetValInIndex(i + 1).GetData();
 
             double totalPheromones = RoadVisibilityFactor + auxVertex.SearchArcwithNumOfVertexs(nextAuxVertex.GetNumVertex()).getPheromones();
 

@@ -28,7 +28,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jLabel2" pref="358" max="32767" attributes="0"/>
+                      <Component id="InstructionsComplete" pref="358" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -40,7 +40,7 @@
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel1" min="-2" pref="83" max="-2" attributes="0"/>
+                      <Component id="titleInstruction" min="-2" pref="83" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -55,9 +55,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="titleInstruction" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jLabel2" pref="305" max="32767" attributes="0"/>
+                      <Component id="InstructionsComplete" pref="388" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -97,15 +97,15 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BContinueActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="titleInstruction">
       <Properties>
         <Property name="text" type="java.lang.String" value="Instrucciones:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="InstructionsComplete">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa; El programa a ejecutar implementa un algoritmo de optimizaci&#xf3;n basado en el comportamiento de colonias de hormigas.  En las distintas ventanas se encuentra un bot&#xf3;n &quot;Actualizar&quot; que permite realizar  los cambios deseados a la hora de buscar, selecionar y modificar campos  antes de iniciar la simulacion. Use este boton cada vez que realice algun cambio.  &lt;br&gt;&#xa;&lt;br&gt; Debe cargar un grafo para usar el resto de las funcionalizades del programa, para ello dispondra del boton cargar y un archivo de texto con la estructura correcta para crear un grafo.  &lt;br&gt;&#xa;&lt;br&gt; Al finalizar el programa, en caso de haber modificado el grafo el boton guardar le permite seleccionar un archivo de texto donde guardar el grafo.  &lt;br&gt;&#xa;&lt;br&gt; En la carpeta test se encuentran dos archivos de texto para tales fines. &lt;br&gt; "/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;  El programa a ejecutar implementa un algoritmo de optimizaci&#xf3;n basado en el comportamiento de colonias de hormigas.  En las distintas ventanas se encuentra un bot&#xf3;n &quot;Actualizar&quot; que permite realizar  los cambios deseados a la hora de buscar, selecionar y modificar campos  antes de iniciar la simulacion. Use este boton cada vez que realice algun cambio.  &lt;br&gt; &lt;br&gt; Debe cargar un grafo para usar el resto de las funcionalizades del programa, para ello dispondra del boton cargar y un archivo de texto con la estructura correcta para crear un grafo.  &lt;br&gt; &lt;br&gt; Al finalizar el programa, en caso de haber modificado el grafo el boton guardar le permite seleccionar un archivo de texto donde guardar el grafo.  &lt;br&gt; &lt;br&gt; En la carpeta test se encuentran dos archivos de texto para tales fines. &lt;br&gt;  &lt;br&gt; La funcion de mostrar grafo presenta graficamente el grafo que contiene el programa. De ser necesario puede pulsar varias veces en el bot&#xf3;n para obtener la vista aerea y no tridimensional del grafo. &lt;br&gt; "/>
       </Properties>
     </Component>
   </SubComponents>

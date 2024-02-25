@@ -16,6 +16,7 @@ public class Welcome extends javax.swing.JFrame {
     public Welcome() {
         initComponents();                       
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.setVisible(true);
     }
     /**
@@ -30,8 +31,8 @@ public class Welcome extends javax.swing.JFrame {
         Welcome = new javax.swing.JLabel();
         Image = new javax.swing.JLabel();
         BContinue = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        titleInstruction = new javax.swing.JLabel();
+        InstructionsComplete = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,10 +49,10 @@ public class Welcome extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Instrucciones:");
+        titleInstruction.setText("Instrucciones:");
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("<html>\n El programa a ejecutar implementa un algoritmo de optimización basado en el comportamiento de colonias de hormigas.  En las distintas ventanas se encuentra un botón \"Actualizar\" que permite realizar  los cambios deseados a la hora de buscar, selecionar y modificar campos  antes de iniciar la simulacion. Use este boton cada vez que realice algun cambio.  <br>\n<br> Debe cargar un grafo para usar el resto de las funcionalizades del programa, para ello dispondra del boton cargar y un archivo de texto con la estructura correcta para crear un grafo.  <br>\n<br> Al finalizar el programa, en caso de haber modificado el grafo el boton guardar le permite seleccionar un archivo de texto donde guardar el grafo.  <br>\n<br> En la carpeta test se encuentran dos archivos de texto para tales fines. <br> ");
+        InstructionsComplete.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        InstructionsComplete.setText("<html>  El programa a ejecutar implementa un algoritmo de optimización basado en el comportamiento de colonias de hormigas.  En las distintas ventanas se encuentra un botón \"Actualizar\" que permite realizar  los cambios deseados a la hora de buscar, selecionar y modificar campos  antes de iniciar la simulacion. Use este boton cada vez que realice algun cambio.  <br> <br> Debe cargar un grafo para usar el resto de las funcionalizades del programa, para ello dispondra del boton cargar y un archivo de texto con la estructura correcta para crear un grafo.  <br> <br> Al finalizar el programa, en caso de haber modificado el grafo el boton guardar le permite seleccionar un archivo de texto donde guardar el grafo.  <br> <br> En la carpeta test se encuentran dos archivos de texto para tales fines. <br>  <br> La funcion de mostrar grafo presenta graficamente el grafo que contiene el programa. De ser necesario puede pulsar varias veces en el botón para obtener la vista aerea y no tridimensional del grafo. <br> ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -62,7 +63,7 @@ public class Welcome extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                        .addComponent(InstructionsComplete, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -71,7 +72,7 @@ public class Welcome extends javax.swing.JFrame {
                             .addComponent(Image, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(17, 17, 17))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(titleInstruction, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -82,9 +83,9 @@ public class Welcome extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1)
+                        .addComponent(titleInstruction)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                        .addComponent(InstructionsComplete, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(44, 44, 44)
@@ -141,8 +142,8 @@ public class Welcome extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BContinue;
     private javax.swing.JLabel Image;
+    private javax.swing.JLabel InstructionsComplete;
     private javax.swing.JLabel Welcome;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel titleInstruction;
     // End of variables declaration//GEN-END:variables
 }

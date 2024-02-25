@@ -23,7 +23,9 @@ public class Load extends javax.swing.JFrame {
      */
     public Load() {
         initComponents();
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     /**
@@ -39,7 +41,7 @@ public class Load extends javax.swing.JFrame {
         Title = new javax.swing.JLabel();
         read = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        textArea = new javax.swing.JTextArea();
+        textAreaTxt = new javax.swing.JTextArea();
         save = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -67,9 +69,9 @@ public class Load extends javax.swing.JFrame {
         });
         getContentPane().add(read, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 123, 89, -1));
 
-        textArea.setColumns(20);
-        textArea.setRows(5);
-        jScrollPane1.setViewportView(textArea);
+        textAreaTxt.setColumns(20);
+        textAreaTxt.setRows(5);
+        jScrollPane1.setViewportView(textAreaTxt);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(251, 72, 284, 258));
 
@@ -114,7 +116,7 @@ public class Load extends javax.swing.JFrame {
                     cadena = cadena + (char) valor;
                     valor = fr.read();
                 }
-                this.textArea.setText(cadena);
+                this.textAreaTxt.setText(cadena);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -124,16 +126,21 @@ public class Load extends javax.swing.JFrame {
     }//GEN-LAST:event_readActionPerformed
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
-
-        Function02Load temporalForCreateGraph = new Function02Load();
-        try {
-            Menu.GraphOfProgram = temporalForCreateGraph.graphToReturn(textArea.getText());
-            if (!Menu.GraphOfProgram.IsGraphEmpty()){
-                JOptionPane.showMessageDialog(null, "Cargado exitoso. Regrese al menu para iniciar la simulacion.");
+        if (!this.textAreaTxt.getText().isEmpty()) {
+            Function02Load temporalForCreateGraph = new Function02Load();
+            try {
+                Menu.GraphOfProgram = temporalForCreateGraph.graphToReturn(textAreaTxt.getText());
+                if (!Menu.GraphOfProgram.IsGraphEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Cargado exitoso. Regrese al menu para iniciar la simulacion.");
+                }
+            } catch (NumberFormatException err) {
+                JOptionPane.showMessageDialog(null, "No es posible convertir este archivo. Estructura incorrecta.");
             }
-        } catch (NumberFormatException err) {
-            JOptionPane.showMessageDialog(null, "No es posible convertir este archivo. Estructura incorrecta.");
         }
+        else {
+            JOptionPane.showMessageDialog(null, "Cargue un archivo antes de guardarlo.");
+        }
+
     }//GEN-LAST:event_saveActionPerformed
 
     /**
@@ -180,6 +187,6 @@ public class Load extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton read;
     private javax.swing.JButton save;
-    private javax.swing.JTextArea textArea;
+    private javax.swing.JTextArea textAreaTxt;
     // End of variables declaration//GEN-END:variables
 }

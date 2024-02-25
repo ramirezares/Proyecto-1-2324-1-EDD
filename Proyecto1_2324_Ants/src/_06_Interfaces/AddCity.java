@@ -9,7 +9,9 @@ import _02_EDD.UndirectedGraph;
 import _02_EDD.UndirectedGraphArc;
 import _02_EDD.Vertex;
 import _04_Functions.Function04AddCity;
+import _04_Functions.Function06ViewWithGraphStream;
 import _05_Validations.Validations;
+import static _06_Interfaces.Menu.GraphOfProgram;
 import javax.swing.JOptionPane;
 
 /**
@@ -49,11 +51,12 @@ public class AddCity extends javax.swing.JFrame {
         destinations = new javax.swing.JComboBox<>();
         titleWeight = new javax.swing.JLabel();
         textFieldWeight = new javax.swing.JTextField();
-        identierOfCity = new javax.swing.JComboBox<>();
+        identifierOfCity = new javax.swing.JComboBox<>();
         buttonAddArc = new javax.swing.JButton();
         bnRefreshCitiesLists = new javax.swing.JButton();
         Cities = new javax.swing.JTextField();
         titleWeight1 = new javax.swing.JLabel();
+        VisualizeGraph = new javax.swing.JButton();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -95,7 +98,7 @@ public class AddCity extends javax.swing.JFrame {
         textFieldWeight.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         textFieldWeight.setText("1");
 
-        identierOfCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
+        identifierOfCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
 
         buttonAddArc.setText("Agregar camino");
         buttonAddArc.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +116,13 @@ public class AddCity extends javax.swing.JFrame {
 
         titleWeight1.setText("Ciudades:");
 
+        VisualizeGraph.setText("Mostrar grafo");
+        VisualizeGraph.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VisualizeGraphActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,6 +132,8 @@ public class AddCity extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(back)
+                        .addGap(248, 248, 248)
+                        .addComponent(VisualizeGraph)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(bnRefreshCitiesLists))
                     .addGroup(layout.createSequentialGroup()
@@ -143,7 +155,7 @@ public class AddCity extends javax.swing.JFrame {
                                     .addComponent(titleAddCity, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(titleIdentifierOfCity, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(identierOfCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(identifierOfCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(buttonAddCity)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
@@ -167,7 +179,7 @@ public class AddCity extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(titleIdentifierOfCity)
                     .addComponent(buttonAddCity)
-                    .addComponent(identierOfCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(identifierOfCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Cities, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(titleWeight1))
                 .addGap(33, 33, 33)
@@ -181,10 +193,11 @@ public class AddCity extends javax.swing.JFrame {
                     .addComponent(titleWeight)
                     .addComponent(textFieldWeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonAddArc))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(back)
-                    .addComponent(bnRefreshCitiesLists))
+                    .addComponent(bnRefreshCitiesLists)
+                    .addComponent(VisualizeGraph))
                 .addContainerGap())
         );
 
@@ -200,15 +213,11 @@ public class AddCity extends javax.swing.JFrame {
 
     private void buttonAddCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddCityActionPerformed
 
-        UndirectedGraph temporalGraph;
-
-        Function04AddCity temporalFunction = new Function04AddCity();
-
-        temporalGraph = temporalFunction.AddCityToVertex(Menu.GraphOfProgram, identierOfCity.getSelectedItem().toString());
-
-        if (temporalGraph != null) {
+        Vertex tem = new Vertex(Integer.parseInt(identifierOfCity.getSelectedItem().toString()));
+        
+        if (!Menu.GraphOfProgram.IsVertexInGraph(tem)) {
+            Menu.GraphOfProgram.AddVertex(tem);
             JOptionPane.showMessageDialog(null, "Ciudad agregada.");
-            Menu.GraphOfProgram = temporalGraph;
         } else {
             JOptionPane.showMessageDialog(null, "Ya se encuentra en el grafo.");
         }
@@ -221,25 +230,30 @@ public class AddCity extends javax.swing.JFrame {
         Validations checker = new Validations();
 
         if (checker.isDistance(this.textFieldWeight.getText())) {
-            if (checker.numsNotEquals(this.origins.getSelectedItem().toString(), this.destinations.getSelectedItem().toString())) {
-                UndirectedGraph temporalGraph;
-                Function04AddCity temporalFunction = new Function04AddCity();
+            if (this.origins.getSelectedItem() != null && this.destinations.getSelectedItem() != null) {
+                if (checker.numsNotEquals(this.origins.getSelectedItem().toString(), this.destinations.getSelectedItem().toString())) {
+                    UndirectedGraph temporalGraph;
+                    Function04AddCity temporalFunction = new Function04AddCity();
 
-                origin = Integer.parseInt(this.origins.getSelectedItem().toString());
-                destination = Integer.parseInt(this.destinations.getSelectedItem().toString());
-                weight = Double.parseDouble(this.textFieldWeight.getText());
-                UndirectedGraphArc Arc = new UndirectedGraphArc(origin, destination, weight);
-                temporalGraph = temporalFunction.AddArcToVertexWithAtributes(Menu.GraphOfProgram, Arc);
+                    origin = Integer.parseInt(this.origins.getSelectedItem().toString());
+                    destination = Integer.parseInt(this.destinations.getSelectedItem().toString());
+                    weight = Double.parseDouble(this.textFieldWeight.getText());
+                    UndirectedGraphArc Arc = new UndirectedGraphArc(origin, destination, weight);
+                    temporalGraph = temporalFunction.AddArcToVertexWithAtributes(Menu.GraphOfProgram, Arc);
 
-                if (temporalGraph != null) {
-                    Menu.GraphOfProgram = temporalGraph;
-                    JOptionPane.showMessageDialog(null, "Camino agregado.");
+                    if (temporalGraph != null) {
+                        Menu.GraphOfProgram = temporalGraph;
+                        JOptionPane.showMessageDialog(null, "Camino agregado.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Ya se encuentra en el grafo.");
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Ya se encuentra en el grafo.");
+                    JOptionPane.showMessageDialog(null, "Camino invalido, origen y destino son iguales.");
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Camino invalido, origen y destino son iguales.");
+                JOptionPane.showMessageDialog(null, "Camino invalido, origen y/o destino vacio.");
             }
+
         } else {
             JOptionPane.showMessageDialog(null, "Distancia invalida.");
         }
@@ -249,9 +263,8 @@ public class AddCity extends javax.swing.JFrame {
         StringBuilder txt = new StringBuilder();
         String item;
 
-        this.origins.removeAll();
-        this.origins.removeAll();
-
+        this.origins.removeAllItems();
+        this.destinations.removeAllItems();
         for (SimpleNode pNode = Menu.GraphOfProgram.getListofVertex().GetpFirst(); pNode != null; pNode = pNode.GetNxt()) {
             Vertex v = (Vertex) pNode.GetData();
             item = String.valueOf(v.GetNumVertex());
@@ -261,6 +274,18 @@ public class AddCity extends javax.swing.JFrame {
             Cities.setText(txt.toString());
         }
     }//GEN-LAST:event_bnRefreshCitiesListsActionPerformed
+
+    private void VisualizeGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisualizeGraphActionPerformed
+
+        if (!GraphOfProgram.IsGraphEmpty()) {
+            Function06ViewWithGraphStream temporal = new Function06ViewWithGraphStream();
+            temporal.visualizeGraphWindouw(Menu.GraphOfProgram);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Carge un grafo antes por favor.");
+        }
+
+    }//GEN-LAST:event_VisualizeGraphActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,12 +327,13 @@ public class AddCity extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Cities;
+    private javax.swing.JButton VisualizeGraph;
     private javax.swing.JButton back;
     private javax.swing.JButton bnRefreshCitiesLists;
     private javax.swing.JButton buttonAddArc;
     private javax.swing.JButton buttonAddCity;
     private javax.swing.JComboBox<String> destinations;
-    private javax.swing.JComboBox<String> identierOfCity;
+    private javax.swing.JComboBox<String> identifierOfCity;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> origins;
     private javax.swing.JTextField textFieldWeight;

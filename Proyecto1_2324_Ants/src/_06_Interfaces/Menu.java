@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author blanf
  */
 public class Menu extends javax.swing.JFrame {
-    
+
     public static UndirectedGraph GraphOfProgram = new UndirectedGraph();
 
     /**
@@ -23,6 +23,7 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.setVisible(true);
     }
 
@@ -44,6 +45,7 @@ public class Menu extends javax.swing.JFrame {
         CloseProgram = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -106,14 +108,11 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 55, Short.MAX_VALUE)
+                        .addGap(0, 54, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(CloseProgram, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(14, 14, 14))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(NewSimulation)
-                                .addGap(147, 147, 147))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(layout.createSequentialGroup()
@@ -124,16 +123,18 @@ public class Menu extends javax.swing.JFrame {
                                         .addComponent(SaveGraphInTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(ModifyGraph, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(54, 54, 54))))))
+                                .addGap(55, 55, 55))))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(NewSimulation)
+                .addGap(146, 146, 146))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(36, 36, 36)
-                .addComponent(NewSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LoadGraph, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ShowGraph, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -141,7 +142,9 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ModifyGraph, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(SaveGraphInTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
+                .addComponent(NewSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
                 .addComponent(CloseProgram, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
@@ -151,11 +154,11 @@ public class Menu extends javax.swing.JFrame {
 
     private void ModifyGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyGraphActionPerformed
         if (!GraphOfProgram.IsGraphEmpty()) {
-            
+
             Modify modifyWindow = new Modify();
             modifyWindow.setVisible(true);
             this.setVisible(false);
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Carge un grafo antes por favor.");
         }
@@ -168,39 +171,41 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_LoadGraphActionPerformed
 
     private void NewSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewSimulationActionPerformed
+
         if (!GraphOfProgram.IsGraphEmpty()) {
-            
+
             SimulateDates simulateDates = new SimulateDates();
             simulateDates.setVisible(true);
             this.setVisible(false);
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Carge un grafo antes por favor.");
         }
     }//GEN-LAST:event_NewSimulationActionPerformed
 
     private void ShowGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowGraphActionPerformed
-        
-          if (!GraphOfProgram.IsGraphEmpty()) {
-          Function06ViewWithGraphStream temporalFunction = new Function06ViewWithGraphStream();
-          temporalFunction.visualizeGraph(GraphOfProgram);
-          Show showWindow = new Show(); showWindow.setVisible(true);
-          this.setVisible(false); //showWindow //Implementar Libreria
-         
-          } else { JOptionPane.showMessageDialog(null, "Carge un grafo antes por favor.");
+
+        if (!GraphOfProgram.IsGraphEmpty()) {
+            Function06ViewWithGraphStream temporal = new Function06ViewWithGraphStream();
+            temporal.visualizeGraphWindouw(Menu.GraphOfProgram);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Carge un grafo antes por favor.");
         }
     }//GEN-LAST:event_ShowGraphActionPerformed
 
     private void SaveGraphInTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveGraphInTXTActionPerformed
-        
-        Function03SaveInTXT txtToSave = new Function03SaveInTXT();
-        txtToSave.txtToSave(GraphOfProgram);
-        
 
+        if (!GraphOfProgram.IsGraphEmpty()) {
+            Function03SaveInTXT txtToSave = new Function03SaveInTXT();
+            txtToSave.txtToSave(GraphOfProgram);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Carge un grafo antes por favor.");
+        }
     }//GEN-LAST:event_SaveGraphInTXTActionPerformed
 
     private void CloseProgramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseProgramActionPerformed
-        System.out.println(GraphOfProgram.ShowGraphSummary());
         System.exit(0);
     }//GEN-LAST:event_CloseProgramActionPerformed
 

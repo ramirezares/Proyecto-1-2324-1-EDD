@@ -14,21 +14,7 @@ import _02_EDD.Vertex;
  */
 public class Function04AddCity {
 
-    public UndirectedGraph AddCityToVertex(UndirectedGraph GraphOfProgram, String identifierNumberOfVertex) {
-        boolean val;
-        int n;
-
-        n = Integer.parseInt(identifierNumberOfVertex);
-        Vertex newVertex = new Vertex(n);
-        val = GraphOfProgram.AddVertex(newVertex);
-
-        if (val) {
-            return GraphOfProgram;
-        } else {
-            return null;
-        }
-    }
-
+    
     public UndirectedGraph AddArcToVertexWithAtributes(UndirectedGraph GraphOfProgram, UndirectedGraphArc Arc) {
         boolean val;
         int origin;

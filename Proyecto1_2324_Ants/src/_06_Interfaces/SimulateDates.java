@@ -289,8 +289,8 @@ public class SimulateDates extends javax.swing.JFrame {
         StringBuilder txt = new StringBuilder();
         String item;
 
-        this.StartVertex.removeAll();
-        this.EndVertex.removeAll();
+        this.StartVertex.removeAllItems();
+        this.EndVertex.removeAllItems();
 
         for (SimpleNode pNode = Menu.GraphOfProgram.getListofVertex().GetpFirst(); pNode != null; pNode = pNode.GetNxt()) {
             Vertex v = (Vertex) pNode.GetData();

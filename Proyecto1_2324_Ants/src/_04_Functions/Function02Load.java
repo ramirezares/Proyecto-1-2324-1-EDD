@@ -8,7 +8,6 @@ import _02_EDD.SimpleNode;
 import _02_EDD.UndirectedGraph;
 import _02_EDD.UndirectedGraphArc;
 import _02_EDD.Vertex;
-import javax.swing.JOptionPane;
 
 /**
  *

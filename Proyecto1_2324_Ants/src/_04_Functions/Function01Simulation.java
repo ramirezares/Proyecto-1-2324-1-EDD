@@ -21,7 +21,6 @@ public class Function01Simulation {
 
         for (int i = 0; i < numberOfAnts; i++) {
             Ant antToAdd = new Ant(StartVertex);
-            antToAdd.getVertexsTraveled().insertLast(StartVertex);
             listOfAnts.insertLast(antToAdd);
         }
         return listOfAnts;

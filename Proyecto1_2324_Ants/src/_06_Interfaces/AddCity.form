@@ -45,6 +45,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="back" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="248" max="-2" attributes="0"/>
+                      <Component id="VisualizeGraph" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="bnRefreshCitiesLists" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -69,7 +71,7 @@
                                   <Component id="titleIdentifierOfCity" alignment="0" pref="201" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="identierOfCity" min="-2" max="-2" attributes="0"/>
+                              <Component id="identifierOfCity" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="buttonAddCity" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="35" max="32767" attributes="0"/>
@@ -101,7 +103,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="titleIdentifierOfCity" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonAddCity" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="identierOfCity" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="identifierOfCity" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Cities" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="titleWeight1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -117,10 +119,11 @@
                   <Component id="textFieldWeight" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonAddArc" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="87" max="32767" attributes="0"/>
+              <EmptySpace pref="120" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="back" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="bnRefreshCitiesLists" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="VisualizeGraph" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -213,7 +216,7 @@
         <Property name="text" type="java.lang.String" value="1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="identierOfCity">
+    <Component class="javax.swing.JComboBox" name="identifierOfCity">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="20">
@@ -266,6 +269,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ciudades:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="VisualizeGraph">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Mostrar grafo"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="VisualizeGraphActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

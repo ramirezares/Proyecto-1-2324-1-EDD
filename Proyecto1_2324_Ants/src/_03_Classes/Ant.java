@@ -57,8 +57,8 @@ public class Ant {
             for (SimpleNode pNodeOfVertexs = this.VertexsTraveled.GetpFirst();
                     pNodeOfVertexs != null;
                     pNodeOfVertexs = pNodeOfVertexs.GetNxt()) {
-                Vertex vertex = (Vertex) pNodeOfVertexs.GetData();
-                if (vertex.GetNumVertex() == vertexToVerify.GetNumVertex()) {
+                Vertex vertexInNode = (Vertex) pNodeOfVertexs.GetData();
+                if (vertexInNode.GetNumVertex() == vertexToVerify.GetNumVertex()) {
                     val = true;
                 }
             }
@@ -79,7 +79,7 @@ public class Ant {
     }
     
     public String ToSummary() {
-        return "Hormiga:" + "ciudadesRecorridas=" + this.VertexsTraveled.GetSize()+ ", distanciaRecorrida=" + this.totalDistanceTraveled + ", ciudadActual=" +this.currentVertex.GetNumVertex()+ '.';
+        return "Hormiga:" + "Ciudades recorridas=" + this.VertexsTraveled.SummaryOfListOfVertexs()+ ". Distancia total recorrida=" + this.totalDistanceTraveled + ", Ultima ciudad visitad=" +this.currentVertex.GetNumVertex()+ '.';
     }
 
 }

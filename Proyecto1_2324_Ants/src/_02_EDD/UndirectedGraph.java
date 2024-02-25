@@ -197,18 +197,36 @@ public class UndirectedGraph implements IUndirectedGraph {
      * están en el grafo.
      */
     @Override
-    public boolean DelArcInVertexInGraph(Vertex vertex, UndirectedGraphArc arc
-    ) {
+    public boolean DelArcInVertexInGraph(Vertex vertex, UndirectedGraphArc arc) {
         boolean val = false;
         if (IsVertexInGraph(vertex)) {
-            Vertex VertexToReview = (Vertex) SearchVertexInGraph(vertex).GetData();
-            for (SimpleNode pNode = VertexToReview.GetListAdy().GetpFirst(), pPrev = null;
-                    pNode != null;
-                    pPrev = pNode, pNode = pNode.GetNxt()) {
+            for (SimpleNode pNodeOfVertex = this.listOfVertex.GetpFirst(), pPrev = null;
+                    pNodeOfVertex != null;
+                    pPrev = pNodeOfVertex, pNodeOfVertex = pNodeOfVertex.GetNxt()) {
+                Vertex VertexToReview = (Vertex) pNodeOfVertex.GetData();
+                if (VertexToReview.GetNumVertex() == vertex.GetNumVertex()) {
+                    for (SimpleNode pNodeOfArcs = VertexToReview.GetListAdy().GetpFirst(), pPrevOfArcs = null;pNodeOfArcs != null;pPrevOfArcs = pNodeOfArcs, pNodeOfArcs = pNodeOfArcs.GetNxt()) {
 
-                UndirectedGraphArc arcInNode = (UndirectedGraphArc) pNode.GetData();
-                if (arcInNode.IsEquals(arc)) {
-                    pPrev.SetNxt(pNode.GetNxt());
+                        UndirectedGraphArc arcInNode = (UndirectedGraphArc) pNodeOfArcs.GetData();
+                        
+                        if (arcInNode.IsEquals(arc)) {
+                            if(pNodeOfArcs == VertexToReview.GetListAdy().GetpFirst()){
+                                VertexToReview.GetListAdy().SetpFirst(pNodeOfArcs.GetNxt());
+                            } else{
+                                pPrevOfArcs.SetNxt(pNodeOfArcs.GetNxt());
+                            }
+                            
+                            if (pNodeOfArcs==VertexToReview.GetListAdy().GetpLast()) {
+                                VertexToReview.GetListAdy().SetpLast(pPrev);
+                            } 
+                            val = true;
+                            int nSize = VertexToReview.GetListAdy().GetSize();
+                            nSize--;
+                            VertexToReview.GetListAdy().SetSize(nSize);
+                            
+
+                        }
+                    }
                 }
             }
         }
@@ -338,32 +356,34 @@ public class UndirectedGraph implements IUndirectedGraph {
         boolean val = false;
         for (SimpleNode pNodeOfVertexs = this.listOfVertex.GetpFirst(); pNodeOfVertexs != null; pNodeOfVertexs = pNodeOfVertexs.GetNxt()) {
             Vertex vertexInNode = (Vertex) pNodeOfVertexs.GetData();
-            for (SimpleNode pNodeOfArc = vertexInNode.GetListAdy().GetpFirst(); pNodeOfArc != null; pNodeOfArc = pNodeOfArc.GetNxt()) {
+            for (SimpleNode pNodeOfArc = vertexInNode.GetListAdy().GetpFirst(), pPrevArc=null;
+                    pNodeOfArc != null;
+                    pNodeOfArc = pNodeOfArc.GetNxt()) {
+                
                 UndirectedGraphArc arcInNode = (UndirectedGraphArc) pNodeOfArc.GetData();
                 if (arcInNode.GetDestination() == numOfVertex) {
-                    this.DelArcInVertexInGraph(vertexInNode, arcInNode);
-                    val = true;
+                    val = this.DelArcInVertexInGraph(vertexInNode, arcInNode);
                 }
             }
         }
         return val;
     }
-    
-    public UndirectedGraphArc SearchArcInVertexInGraphWithNumOfDestinationVertex(int numOfNextVertex){
+
+    public UndirectedGraphArc SearchArcInVertexInGraphWithNumOfDestinationVertex(int numOfNextVertex) {
         UndirectedGraphArc arcToReturn = null;
-        
-        if(this.isVertexInGraphWithNum(numOfNextVertex)){
+
+        if (this.isVertexInGraphWithNum(numOfNextVertex)) {
             Vertex VertexToReview = (Vertex) this.SearchVertexInGraphWithNum(numOfNextVertex);
-            for(SimpleNode pNodeOfArcs=VertexToReview.GetListAdy().GetpFirst();
-                    pNodeOfArcs!=null;
-                    pNodeOfArcs=pNodeOfArcs.GetNxt()){
+            for (SimpleNode pNodeOfArcs = VertexToReview.GetListAdy().GetpFirst();
+                    pNodeOfArcs != null;
+                    pNodeOfArcs = pNodeOfArcs.GetNxt()) {
                 UndirectedGraphArc arcInNode = (UndirectedGraphArc) pNodeOfArcs.GetData();
-                if(arcInNode.GetDestination()==numOfNextVertex){
+                if (arcInNode.GetDestination() == numOfNextVertex) {
                     arcToReturn = arcInNode;
-                    
+
                 }
             }
-        }        
+        }
         return arcToReturn;
     }
 }
