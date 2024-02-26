@@ -16,16 +16,19 @@ import java.util.Random;
  */
 public class AntSystemCycle {
 
-    UndirectedGraph GraphOfSimulation;
-    LinkedSimpleList listOfAnts;
-    int alfaValue, betaValue;
-    double rhoValue;
-    int numberOfCycle;
-    Vertex StartVertex, EndVertex;
-    LinkedSimpleList bestRouteArcs;
-    double bestDistance, totalDistanceTraveled;
-    double AmountOfPheromones;
+    UndirectedGraph GraphOfSimulation;          //Grafo a recorrer
+    LinkedSimpleList listOfAnts;                //Lista de hormigas que formaran parte de la simulacion
+    int alfaValue, betaValue;                   //Valor de alfa para la simulacion
+    double rhoValue;                            //Valor de beta para la simulacion
+    int numberOfCycle;                          //Valor de rho para la simulacion
+    Vertex StartVertex, EndVertex;              //Numero del ciclo 
+    LinkedSimpleList bestRouteArcs;             //Vertice de partida para la simulacion
+    double bestDistance, totalDistanceTraveled; //Vertice de llegada para la simulacion
+    double AmountOfPheromones;                  //Cantidad de feromonas del ciclo
 
+    /**
+     * Instancia la clase AntSystemCycle con todos sus atributos vacios o en 0.
+     */
     public AntSystemCycle() {
         this.GraphOfSimulation = new UndirectedGraph();
         this.listOfAnts = new LinkedSimpleList();
@@ -41,6 +44,19 @@ public class AntSystemCycle {
         this.AmountOfPheromones = 0;
     }
 
+    /**
+     * Instancia la clase AntSystemCycle con los valores iniciales obtenidos de
+     * los datos para la simulacion
+     *
+     * @param GraphOfSimulation grafo a recorrer
+     * @param listOfAnts lista de hormigas que formaran parte de la simulacion
+     * @param alfaValue valor de alfa para la simulacion
+     * @param betaValue valor de beta para la simulacion
+     * @param rhoValue valor de rho para la simulacion
+     * @param numberOfCycle numero del ciclo
+     * @param StartVertex vertice de partida para la simulacion
+     * @param EndVertex vertice de llegada para la simulacion
+     */
     public AntSystemCycle(UndirectedGraph GraphOfSimulation,
             LinkedSimpleList listOfAnts, int alfaValue, int betaValue,
             double rhoValue, int numberOfCycle,
@@ -59,6 +75,15 @@ public class AntSystemCycle {
         this.AmountOfPheromones = 0;
     }
 
+    /**
+     * Realiza un ciclo, realizando el recorrido completo para cada hormiga de
+     * la simulacion.
+     *
+     * @param listOfAntsToCycle lista de hormigas que forman parte del ciclo.
+     * @param NumberOfCycle numero del ciclo para el resumen del ciclo
+     * @return resumen del ciclo, con el numero del mismo y el resumen del
+     * recorrido de cada hormiga
+     */
     public String eachCycle(LinkedSimpleList listOfAntsToCycle, int NumberOfCycle) {
         StringBuilder summaryOfCycle = new StringBuilder();
         summaryOfCycle.append("Ciclo ").append(NumberOfCycle).append(". Resumen de las hormigas:\n");
@@ -74,7 +99,14 @@ public class AntSystemCycle {
         return summaryOfCycle.toString();
     }
 
-    // Función para que la hormiga recorra el hormiguero completo
+    /**
+     * Realiza un recorrido completo, moviendo a la hormiga por los vertices,
+     * empleando los demas metodos.
+     *
+     * @param ant instancia de la clase Ant a ciclar.
+     * @return el texto resumen del recorrido de la hormiga para ser mostrado en
+     * la interfaz.
+     */
     public String completeAntRoute(Ant ant) {
         StringBuilder txt = new StringBuilder();
         for (int i = 0; i < this.GraphOfSimulation.getListofVertex().GetSize(); i++) {
@@ -84,10 +116,10 @@ public class AntSystemCycle {
                     LinkedSimpleList probability = probabilityList(candidateVertexs);
                     UndirectedGraphArc arc = chooseNextVertex(probability, candidateVertexs);
                     Vertex vertexToMove = this.GraphOfSimulation.SearchVertexInGraphWithNum(arc.GetDestination());
-                    if (!ant.verifyAmongVisitedVertexs(arc.GetDestination())){
+                    if (!ant.verifyAmongVisitedVertexs(arc.GetDestination())) {
                         this.move(ant, vertexToMove, arc.GetWeight());
                     }
-                    
+
                 }
             }
         }
@@ -103,14 +135,18 @@ public class AntSystemCycle {
         return txt.toString();
     }
 
-    // lista obtener ciudades candidatas recibe hormiga
-    // Función para obtener una lista con ciudades que son candidatas para que la hormiga se mueva
+    /**
+     * Construye y retorna la lista de arcos que dirigen a vertices que la
+     * hormiga no ha visitado.
+     *
+     * @param ant instancia de la clase Ant a la cual se le genera la lista
+     * @return la lista de arcos que la hormiga puede recorrer.
+     */
     public LinkedSimpleList<UndirectedGraphArc> getCandidateArcsToVertexs(Ant ant) {
 
         LinkedSimpleList<UndirectedGraphArc> candidateVertexs = new LinkedSimpleList<>();
         Vertex vertex = ant.getCurrentVertex();
-        
-        
+
         for (int i = 0; i < vertex.GetListAdy().GetSize(); i++) {
             UndirectedGraphArc Arc = (UndirectedGraphArc) vertex.GetListAdy().GetValInIndex(i).GetData();
             if (!ant.verifyAmongVisitedVertexs(Arc.GetDestination())) {
@@ -120,8 +156,15 @@ public class AntSystemCycle {
         return candidateVertexs;
     }
 
-    // probabilidades recibe las ciudades candidatas
-    // Función de probabilidades
+    /**
+     * Construye y retorna la lista de probabilidades segun la lista de arcos
+     * indicada y los atributos de cada arco.
+     *
+     * @param candidateVertexs lista de vertices a los cuales la hormiga puede
+     * ir.
+     * @return la lista de probabilidades con las probabilidades de cada
+     * vertice.
+     */
     public LinkedSimpleList probabilityList(LinkedSimpleList candidateVertexs) {
         LinkedSimpleList probabilitiesDivListToReturn = new LinkedSimpleList();
         LinkedSimpleList Probabilities = new LinkedSimpleList();
@@ -143,6 +186,16 @@ public class AntSystemCycle {
         return probabilitiesDivListToReturn;
     }
 
+    /**
+     * Decide y retorna el nuevo vertice segun la lista de probabilidades y los
+     * vertices candidatos para ir, por los cuales la hormiga no ha pasado.
+     *
+     * @param probabilitiesDivListToUse lista de probabilidades para decidir el
+     * nuevo vertice.
+     * @param candidateVertexs lista de vertices a los cuales puede ir la
+     * hormiga.
+     * @return el camino al vertice destino elegido.
+     */
     public UndirectedGraphArc chooseNextVertex(LinkedSimpleList probabilitiesDivListToUse, LinkedSimpleList<UndirectedGraphArc> candidateVertexs) {
         LinkedSimpleList<Integer> indexs = new LinkedSimpleList();
         double MayorProbability = 0;
@@ -160,7 +213,11 @@ public class AntSystemCycle {
         return ArcChosed;
     }
 
-    // Función que resetea las hormigas de la lista de hormigas
+    /**
+     * Reinicia el recorrido de las hormigas para un nuevo ciclo de la
+     * simulacion. Devuelve a la hormiga al vertice de inicio, y borra su
+     * trayectoria (lista de vertices) y distancia recorrida.
+     */
     public void restartAnts() {
         for (int i = 0; i < this.listOfAnts.GetSize(); i++) {
             Ant antReset = (Ant) this.listOfAnts.GetValInIndex(i).GetData();
@@ -171,8 +228,13 @@ public class AntSystemCycle {
         }
     }
 
-    //incrementar feromona 
-    // Función de incrementación de feromonas en el camino
+    /**
+     * Incrementa las feromonas para cada camino recorrido por una instancia de
+     * la clase hormiga.
+     *
+     * @param ant instancia de la clase hormiga que recorre los caminos e
+     * incrementa su atributo feromona.
+     */
     public void increasePheromones(Ant ant) {
         double RoadVisibilityFactor = (1.0 / ant.getTotalDistanceTraveled());
 
@@ -186,8 +248,9 @@ public class AntSystemCycle {
         }
     }
 
-    //evaporar feromonas
-// Función de evaporación de feromonas
+    /**
+     * Evapora las feromonas de los arcos o caminos segun el valor de rho "p".
+     */
     public void evaporatePheromones() {
         for (int i = 0; i < GraphOfSimulation.getListofVertex().GetSize(); i++) {
             Vertex currentVertex = (Vertex) this.GraphOfSimulation.getListofVertex().GetValInIndex(i).GetData();
@@ -199,6 +262,16 @@ public class AntSystemCycle {
         }
     }
 
+    /**
+     * Permite el movimiento de una instancia de la clase Ant, definiendo su
+     * nuevo vertice actual, añadiendolo a su lista de vertices y modificando su
+     * distancia recorrida.
+     *
+     * @param ant instancia de la clase hormiga a ser actualizada.
+     * @param Destination vertice al cual se moverá hormiga.
+     * @param distanceOfPath distancia a ser sumada a la distancia total
+     * recorrida por la instancia
+     */
     public void move(Ant ant, Vertex Destination, double distanceOfPath) {
 
         Vertex newCurrentVertex = this.GraphOfSimulation.SearchVertexInGraphWithNum(Destination.GetNumVertex());

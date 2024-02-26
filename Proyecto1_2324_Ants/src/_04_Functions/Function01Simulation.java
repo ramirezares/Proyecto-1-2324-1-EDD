@@ -16,6 +16,12 @@ import _03_Classes.AntSystemCycle;
  */
 public class Function01Simulation {
 
+    /**
+     * Incializa la lista de hormigas a ser utilizada en la simulacion.
+     * @param numberOfAnts numero de hormigas deseado
+     * @param StartVertex vertice de partida de las hormigas
+     * @return la lista de hormigas.
+     */
     public LinkedSimpleList makeListOfAnts(int numberOfAnts, Vertex StartVertex) {
         LinkedSimpleList listOfAnts = new LinkedSimpleList();
 
@@ -25,8 +31,12 @@ public class Function01Simulation {
         }
         return listOfAnts;
     }
-
-    //Funcion para inicializar feromonas
+    
+    /**
+     * Inicializa las feromonas de cada arco antes de iniciar la simulacion.
+     * @param simulationN sistema que contiene el grafo en el que se inicializarán las feromonas.
+     * @return el sistema con el grafo con sus feromonas ya inicializadas.
+     */
     public AntSystemCycle inicializePheromones(AntSystemCycle simulationN) {
         int numVertexs = simulationN.getGraphOfSimulation().getListofVertex().GetSize();
 
@@ -40,6 +50,11 @@ public class Function01Simulation {
         return simulationN;
     }
 
+    /**
+     * Construye y devuelve el resumen de la mejor ruta encontrada por una hormiga.
+     * @param BestRouteArcsList lista de vertices recorridos por la hormiga.
+     * @return el resumen con los vertices visitados por cada hormiga.
+     */
     public String FormatTxtToBestRouteArcs(LinkedSimpleList<Vertex> BestRouteArcsList) {
         StringBuilder txt = new StringBuilder();
 

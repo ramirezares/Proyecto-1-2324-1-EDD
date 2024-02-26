@@ -9,7 +9,7 @@ import _02_EDD.UndirectedGraph;
 import _02_EDD.UndirectedGraphArc;
 import _02_EDD.Vertex;
 import _04_Functions.Function04AddCity;
-import _04_Functions.Function06ViewWithGraphStream;
+import _04_Functions.Function05ViewWithGraphStream;
 import _05_Validations.Validations;
 import static _06_Interfaces.Menu.GraphOfProgram;
 import javax.swing.JOptionPane;
@@ -278,7 +278,7 @@ public class AddCity extends javax.swing.JFrame {
     private void VisualizeGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisualizeGraphActionPerformed
 
         if (!GraphOfProgram.IsGraphEmpty()) {
-            Function06ViewWithGraphStream temporal = new Function06ViewWithGraphStream();
+            Function05ViewWithGraphStream temporal = new Function05ViewWithGraphStream();
             temporal.visualizeGraphWindouw(Menu.GraphOfProgram);
 
         } else {

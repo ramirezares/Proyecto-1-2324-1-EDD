@@ -20,17 +20,26 @@ import org.graphstream.ui.view.Viewer;
  *
  * @author AresR
  */
-public class Function06ViewWithGraphStream {
+public class Function05ViewWithGraphStream {
 
-    public Function06ViewWithGraphStream() {
+    public Function05ViewWithGraphStream() {
     }
 
+    /**
+     * Muestra el grafo en un componente JFrame, implementando la libreria
+     * GraphStream y deshabilitando el cerrado del programa cuando se le pulsa a
+     * la X en la esquina superior de la ventana.
+     *
+     * @param GraphToVisualize grafo a visualizar con la libreria.
+     * @return true si muestra la representacion grafica del grafo, false en
+     * caso contrario.
+     */
     public boolean visualizeGraphWindouw(UndirectedGraph GraphToVisualize) {
-        boolean active=true;
-        System.setProperty("org.graphstream.ui", "swing"); 
-        Graph graph = new SingleGraph("Demo"); 
+        boolean active = true;
+        System.setProperty("org.graphstream.ui", "swing");
+        Graph graph = new SingleGraph("Demo");
 
-
+        //Agrega cada vertice del grafo de la simulacion al grafo que se visualizará.
         for (SimpleNode pNode = GraphToVisualize.getListofVertex().GetpFirst(); pNode != null; pNode = pNode.GetNxt()) {
             Vertex vertex = (Vertex) pNode.GetData();
             graph.addNode(Integer.toString(vertex.GetNumVertex()));
@@ -38,6 +47,7 @@ public class Function06ViewWithGraphStream {
             node.setAttribute("ui.label", Integer.toString(vertex.GetNumVertex()));
         }
 
+        //Agrega cada arco el grafo de la simulacion al grafo que se visualizará.
         for (SimpleNode pNodeOfVertex = GraphToVisualize.getListofVertex().GetpFirst(); pNodeOfVertex != null; pNodeOfVertex = pNodeOfVertex.GetNxt()) {
             Vertex vertex = (Vertex) pNodeOfVertex.GetData();
             for (SimpleNode pNodeOfArcs = vertex.GetListAdy().GetpFirst(); pNodeOfArcs != null; pNodeOfArcs = pNodeOfArcs.GetNxt()) {
@@ -50,32 +60,35 @@ public class Function06ViewWithGraphStream {
             }
         }
 
-        //Asignacion de texto a cada Arco y configuracion de visualizacion.
-        graph.edges().forEach(edge -> {double distance = (double) edge.getAttribute("distance");
-        edge.setAttribute("ui.label", String.valueOf(distance));});
+        //Asigna el texto a cada Arco y configura la visualizacion.
+        graph.edges().forEach(edge -> {
+            double distance = (double) edge.getAttribute("distance");
+            edge.setAttribute("ui.label", String.valueOf(distance));
+        });
         graph.setAttribute("ui.stylesheet", "edge { text-background-mode: plain; text-size: 30; }");
 
-        //Asignacion de texto a cada Vertice y configuracion de visualizacion.
+        //Asigna el texto a cada Vertice configura la de visualizacion.
         for (Node node : graph) {
             node.setAttribute("ui.label", node.getId());
         }
         graph.setAttribute("ui.stylesheet", "node { fill-color: red; text-color: blue;  text-size: 40px; }");
-        
-        Viewer viewer = new SwingViewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD) {};
+
+        //Crea el componente que será añadido al JFrame.
+        Viewer viewer = new SwingViewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD) {
+        };
         viewer.enableAutoLayout();
 
-        // Crear un ViewPanel de este Viewer
         ViewPanel viewPanel = (ViewPanel) viewer.addDefaultView(false); // false indica que no se crea un JFrame
 
-        // Configurar un JFrame propio y añadir el ViewPanel a este JFrame
+        // Configura un JFrame propio y añade el ViewPanel.
         JFrame frame = new JFrame("Mostrar grafo");
         frame.setLayout(new BorderLayout());
         frame.add(viewPanel, BorderLayout.CENTER);
 
-        // Configurar la operación de cierre para que no cierre la aplicación
+        // Modifica el cierre para que no se cierre el programa cuando se cierre la ventana de visualizacion.
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        // Mostrar el JFrame
+        // Muestra la ventana.
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);

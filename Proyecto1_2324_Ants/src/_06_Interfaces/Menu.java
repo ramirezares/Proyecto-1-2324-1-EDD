@@ -6,7 +6,7 @@ package _06_Interfaces;
 
 import _02_EDD.UndirectedGraph;
 import _04_Functions.Function03SaveInTXT;
-import _04_Functions.Function06ViewWithGraphStream;
+import _04_Functions.Function05ViewWithGraphStream;
 import javax.swing.JOptionPane;
 
 /**
@@ -186,7 +186,7 @@ public class Menu extends javax.swing.JFrame {
     private void ShowGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowGraphActionPerformed
 
         if (!GraphOfProgram.IsGraphEmpty()) {
-            Function06ViewWithGraphStream temporal = new Function06ViewWithGraphStream();
+            Function05ViewWithGraphStream temporal = new Function05ViewWithGraphStream();
             temporal.visualizeGraphWindouw(Menu.GraphOfProgram);
 
         } else {

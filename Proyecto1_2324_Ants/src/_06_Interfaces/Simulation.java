@@ -10,7 +10,7 @@ import _02_EDD.Vertex;
 import _03_Classes.Ant;
 import _03_Classes.AntSystemCycle;
 import _04_Functions.Function01Simulation;
-import _04_Functions.Function06ViewWithGraphStream;
+import _04_Functions.Function05ViewWithGraphStream;
 import javax.swing.JOptionPane;
 
 /**
@@ -240,7 +240,7 @@ public class Simulation extends javax.swing.JFrame {
 
             Prepared = true;
 
-            Function06ViewWithGraphStream temporal = new Function06ViewWithGraphStream();
+            Function05ViewWithGraphStream temporal = new Function05ViewWithGraphStream();
             temporal.visualizeGraphWindouw(currentSimulation.getGraphOfSimulation());
 
         } else {
