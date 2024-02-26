@@ -123,7 +123,8 @@ public interface IUndirectedGraph {
     public int getNumVertexs();
 
     /**
-     * Metodo a desarrollar para modificar el atributo el número máximo de vértices en el grafo.
+     * Metodo a desarrollar para modificar el atributo el número máximo de
+     * vértices en el grafo.
      *
      * @param numVertices El nuevo número máximo de vértices.
      */
@@ -138,7 +139,7 @@ public interface IUndirectedGraph {
     public LinkedSimpleList getListofVertex();
 
     /**
-     * Metodo a desarrollar para modificar el atributo listOfVertex del grafo, 
+     * Metodo a desarrollar para modificar el atributo listOfVertex del grafo,
      * reemplazandolo por la nueva lista.
      *
      * @param ListofVertex

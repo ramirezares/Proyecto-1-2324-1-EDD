@@ -158,7 +158,7 @@ public class LinkedSimpleList<A> implements ILinkedList<A> {
                     break;
                 }
             }
-        } 
+        }
     }
 
     /**
@@ -202,6 +202,12 @@ public class LinkedSimpleList<A> implements ILinkedList<A> {
         return null;
     }
 
+    /**
+     * Modifica el valor contenido en un nodo en la posicion indicada.
+     *
+     * @param index la posicion en la cual se desea colocar el nuevo contenido.
+     * @param newData el nuevo contenido a ser introducido en la lista.
+     */
     public void SetValInIndex(int index, A newData) {
         if (this.size > 0) {
             if (index <= this.size) {
@@ -217,6 +223,12 @@ public class LinkedSimpleList<A> implements ILinkedList<A> {
         }
     }
 
+    /**
+     * Devuelve un resumen de una lista con nodos que almacenan vertices.
+     * Retorna los numeros de los vertices separados por comas
+     *
+     * @return el texto resumen de la lista de vertices
+     */
     public String SummaryOfListOfVertexs() {
         StringBuilder txt = new StringBuilder();
 

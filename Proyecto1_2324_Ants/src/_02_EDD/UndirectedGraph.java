@@ -13,12 +13,12 @@ package _02_EDD;
  */
 public class UndirectedGraph implements IUndirectedGraph {
 
-    int numVertexs;
-    LinkedSimpleList<Vertex> listOfVertex;   // Lista de adyacencia
+    int numVertexs;                          // Número maximo de vertices 
+    LinkedSimpleList<Vertex> listOfVertex;   // Lista de vertices
 
     /**
      * Instancia la clase UndirectedGraph. Inicializa el número de vértices en
-     * -1 y crea una nueva lista de vértices. Crea el grafo vacio
+     * -1 y crea una nueva lista de vértices. Crea un grafo vacio.
      */
     public UndirectedGraph() {
         this.numVertexs = -1;
@@ -205,25 +205,24 @@ public class UndirectedGraph implements IUndirectedGraph {
                     pPrev = pNodeOfVertex, pNodeOfVertex = pNodeOfVertex.GetNxt()) {
                 Vertex VertexToReview = (Vertex) pNodeOfVertex.GetData();
                 if (VertexToReview.GetNumVertex() == vertex.GetNumVertex()) {
-                    for (SimpleNode pNodeOfArcs = VertexToReview.GetListAdy().GetpFirst(), pPrevOfArcs = null;pNodeOfArcs != null;pPrevOfArcs = pNodeOfArcs, pNodeOfArcs = pNodeOfArcs.GetNxt()) {
+                    for (SimpleNode pNodeOfArcs = VertexToReview.GetListAdy().GetpFirst(), pPrevOfArcs = null; pNodeOfArcs != null; pPrevOfArcs = pNodeOfArcs, pNodeOfArcs = pNodeOfArcs.GetNxt()) {
 
                         UndirectedGraphArc arcInNode = (UndirectedGraphArc) pNodeOfArcs.GetData();
-                        
+
                         if (arcInNode.IsEquals(arc)) {
-                            if(pNodeOfArcs == VertexToReview.GetListAdy().GetpFirst()){
+                            if (pNodeOfArcs == VertexToReview.GetListAdy().GetpFirst()) {
                                 VertexToReview.GetListAdy().SetpFirst(pNodeOfArcs.GetNxt());
-                            } else{
+                            } else {
                                 pPrevOfArcs.SetNxt(pNodeOfArcs.GetNxt());
                             }
-                            
-                            if (pNodeOfArcs==VertexToReview.GetListAdy().GetpLast()) {
+
+                            if (pNodeOfArcs == VertexToReview.GetListAdy().GetpLast()) {
                                 VertexToReview.GetListAdy().SetpLast(pPrev);
-                            } 
+                            }
                             val = true;
                             int nSize = VertexToReview.GetListAdy().GetSize();
                             nSize--;
                             VertexToReview.GetListAdy().SetSize(nSize);
-                            
 
                         }
                     }
@@ -332,6 +331,13 @@ public class UndirectedGraph implements IUndirectedGraph {
         return val;
     }
 
+    /**
+     * Busca y devuelve un vertice en la lista de vertices del grafo, con el
+     * numero del vertice.
+     *
+     * @param numOfVertex numero del vertice que se desea obtener.
+     * @return El vertice encontrado que corresponde con el numero ingresado.
+     */
     public Vertex SearchVertexInGraphWithNum(int numOfVertex) {
         Vertex vertexInNode, vertexToReturn = null;
         if (this.isVertexInGraphWithNum(numOfVertex)) {
@@ -356,10 +362,10 @@ public class UndirectedGraph implements IUndirectedGraph {
         boolean val = false;
         for (SimpleNode pNodeOfVertexs = this.listOfVertex.GetpFirst(); pNodeOfVertexs != null; pNodeOfVertexs = pNodeOfVertexs.GetNxt()) {
             Vertex vertexInNode = (Vertex) pNodeOfVertexs.GetData();
-            for (SimpleNode pNodeOfArc = vertexInNode.GetListAdy().GetpFirst(), pPrevArc=null;
+            for (SimpleNode pNodeOfArc = vertexInNode.GetListAdy().GetpFirst(), pPrevArc = null;
                     pNodeOfArc != null;
                     pNodeOfArc = pNodeOfArc.GetNxt()) {
-                
+
                 UndirectedGraphArc arcInNode = (UndirectedGraphArc) pNodeOfArc.GetData();
                 if (arcInNode.GetDestination() == numOfVertex) {
                     val = this.DelArcInVertexInGraph(vertexInNode, arcInNode);
@@ -367,23 +373,5 @@ public class UndirectedGraph implements IUndirectedGraph {
             }
         }
         return val;
-    }
-
-    public UndirectedGraphArc SearchArcInVertexInGraphWithNumOfDestinationVertex(int numOfNextVertex) {
-        UndirectedGraphArc arcToReturn = null;
-
-        if (this.isVertexInGraphWithNum(numOfNextVertex)) {
-            Vertex VertexToReview = (Vertex) this.SearchVertexInGraphWithNum(numOfNextVertex);
-            for (SimpleNode pNodeOfArcs = VertexToReview.GetListAdy().GetpFirst();
-                    pNodeOfArcs != null;
-                    pNodeOfArcs = pNodeOfArcs.GetNxt()) {
-                UndirectedGraphArc arcInNode = (UndirectedGraphArc) pNodeOfArcs.GetData();
-                if (arcInNode.GetDestination() == numOfNextVertex) {
-                    arcToReturn = arcInNode;
-
-                }
-            }
-        }
-        return arcToReturn;
     }
 }
