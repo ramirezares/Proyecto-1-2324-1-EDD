@@ -1,11 +1,7 @@
-Prueba de conexion. 
+Leer las instrucciones del programa al inicio. 
 
-Prueba de modificación.
+En la carpeta tst se encuentran dos archivos de texto. Uno para la función cargar grafo y el otro para la función guardar grafo.
 
-aosdfoads prueba de carlosss
+Proyecto EDD. 2324-2.
 
-prueba ari
-
-prueb2 ari
-
-prueba3 ari
+Ares Ramírez.
